@@ -185,7 +185,7 @@ $("#defaultTable").on("click", "td button", function () {
                         if ($_SESSION['role']=="agent") {
                              
                         for ($i=0 ; $i<count($arrResult); $i++){   ?>
-       <?php $x =0;?>
+       
                         <tr>
                         <td> <?php echo $arrResult[$i]['prospect_id']; ?> </td>
                         <td> <?php echo $arrResult[$i]['action_date']; ?></td>

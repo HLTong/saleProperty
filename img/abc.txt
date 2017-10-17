@@ -1,0 +1,24 @@
+SELECT project_id , count(property_id) as 'number' from property group by project_id - 100% 
+SELECT project_id , count(property_id) as 'number' from property where status ='taken' group by project_id - taken
+
+count(property_id) / count(property_id) * 100
+
+
+
+SELECT property.project_id , count(property_id) as 'number' from property LEFT JOIN project ON property.project_id = project.project_id  where status ='taken'  group by project_id
+
+SELECT project.project_id , count(property.project_id) as 'number' from project LEFT JOIN property ON project.project_id = property.project_id group by project.project_id
+
+
+
+
+SELECT project.project_id , count(property.project_id) as 'number' 
+
+from project and property 
+
+
+LEFT JOIN property ON project.project_id = property.project_id 
+
+where project.project_id = property.project_id and status='taken' 
+
+group by project.project_id

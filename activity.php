@@ -280,7 +280,8 @@ $howmany=mysqli_affected_rows($link);
      
     </tbody>
   </table>
-
+  
+<div>
        <?php if ($arrResult2[$i]['status'] == "Reserved"){ ?>
        <img src="img/1.png" style="float:left" width='60%' class="img-rounded"/>
            
@@ -298,7 +299,7 @@ $howmany=mysqli_affected_rows($link);
        <br>
        
      
-       
+       <div>
 
     
        

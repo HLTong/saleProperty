@@ -202,7 +202,7 @@ $howmany=mysqli_affected_rows($link);
                        required data-error="Offer Price is required"/>
                 <div class="help-block with-errors"></div>
                 </div>
-            </div>Ï
+            </div>
         
                     <div class="form-group">
                 <label class="control-label col-sm-3">Payment Type:</label>
@@ -237,6 +237,7 @@ $howmany=mysqli_affected_rows($link);
       
     <div id="menu3" class="tab-pane fade">
         <h3>Status Update </h3>
+        <button type="button" style="float:right" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Upload Document</button><br><br>
            <?php for ($i=0 ; $i<count($arrResult2); $i++){   ?>
         <br>
 
@@ -245,23 +246,7 @@ $howmany=mysqli_affected_rows($link);
                <input type="hidden" class="form-control" id="activity_id" name="activity_id" value="<?php echo $arrResult2[$i]['activity_id']; ?>">
                  <input type="hidden" class="form-control" id="status" name="status" value="<?php echo $arrResult2[$i]['status']; ?>">
         
-       <br><Br>
-        
-       <?php if ($arrResult2[$i]['status'] == "Reserved"){ ?>
-       <img src="img/1.png" style="float:left" width='60%' class="img-rounded"/>
-           
-           <?php } if ($arrResult2[$i]['status'] == "Reservation Approved"){ ?>
-        <img src="img/2.png" style="float:left" width='60%' class="img-rounded"/>
-       
-                  <?php } if ($arrResult2[$i]['status'] == "Contract Signed And Submitted"){ ?>
-        <img src="img/3.png" style="float:left" width='60%' class="img-rounded"/>
-       
-                  <?php } if ($arrResult2[$i]['status'] == "Sold"){ ?>
-        <img src="img/4.png" style="float:left" width='60%' class="img-rounded"/>
-                  <?php } ?>  
-       
-   
-       <br>
+       <br><br>
        <table class="table table-bordered">
         <thead>
         <tr>
@@ -273,6 +258,7 @@ $howmany=mysqli_affected_rows($link);
            
         </tr>
         </thead>
+        
         
 <?php  
 include("dbFunctions.php");
@@ -294,6 +280,23 @@ $howmany=mysqli_affected_rows($link);
      
     </tbody>
   </table>
+
+       <?php if ($arrResult2[$i]['status'] == "Reserved"){ ?>
+       <img src="img/1.png" style="float:left" width='60%' class="img-rounded"/>
+           
+           <?php } if ($arrResult2[$i]['status'] == "Reservation Approved"){ ?>
+        <img src="img/2.png" style="float:left" width='60%' class="img-rounded"/>
+       
+                  <?php } if ($arrResult2[$i]['status'] == "Contract Signed And Submitted"){ ?>
+        <img src="img/3.png" style="float:left" width='60%' class="img-rounded"/>
+       
+                  <?php } if ($arrResult2[$i]['status'] == "Sold"){ ?>
+        <img src="img/4.png" style="float:left" width='60%' class="img-rounded"/>
+                  <?php } ?>  
+       
+   
+       <br>
+       
      
        
 
@@ -325,7 +328,48 @@ $howmany=mysqli_affected_rows($link);
                 <?php } ?>
         </div>
         
+        <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Upload Documentation</h4>
+        </div>
+
+                
+<form id="UploadForm" class="form-horizontal" role="form" action="addDocument.php" method="post" data-toggle="validator" enctype="multipart/form-data">
+            <div class="modal-body">
+            
+            <div class="row">
+            <div class="col-sm-offset-1 col-sm-3"><p> <img src="img/upload.png" width='100px' class="img-rounded"/></p></div>
+            <div class="col-sm-6">    
+                <bR>
+        <label >Upload Document</label>
+        <br>
+        <input type="text" name="title" id="title" placeholder="File Title name" required/><br><br>
+        <input type="file" name="document" id="document" required/>
+        <input type="hidden" name="property_id" id="property_id" value="<?php echo $propertyID; ?>" required/>  <br> 
+        <input type="hidden" name="projectName" id="projectName" value="<?php echo $projectName; ?>" required/>  <br> 
+        <input type="hidden" name="projectID" id="projectID" value="<?php echo $projectID; ?>" required/>  <br> 
+
         
+                
+                
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <button type="submit" class="btn btn-primary">Upload Document</button>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></form>
+        
+      </div>
+      
+    </div>
+  </div>
         
         
         

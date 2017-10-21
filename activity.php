@@ -76,11 +76,11 @@ session_start();
             <?php 
                 while ($rowSelect=mysqli_fetch_assoc($resultSelect)){
                     $projectName = $rowSelect['project_id'];
-                    $projectID = $rowSelect['name'];
+                    $projectID = $rowSelect['project_name'];
                     $block = $rowSelect['block']; 
                     $street = $rowSelect['street']; 
                     $unit = $rowSelect['unit'];
-                    $status = $rowSelect['status'];
+                    $status = $rowSelect['property_status'];
                     $target_price = $rowSelect['target_sale_price'];
                     $actual_price = $rowSelect['actual_sale_price'];
                     $description = $rowSelect['description'];

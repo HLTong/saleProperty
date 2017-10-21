@@ -38,7 +38,7 @@
         
         if (move_uploaded_file($_FILES['image']['tmp_name'], $completePath)) {
             $queryInsert = "INSERT INTO property
-                (project_id, block, unit, street, status, target_sale_price, description, image)
+                (project_id, block, unit, street, property_status, target_sale_price, description, image)
                 VALUES ('$project_id','$block','$unit','$street','Available','$target_sale_price','$description','$fileName')";
             
             $resultInsert = mysqli_query($link, $queryInsert) or die;

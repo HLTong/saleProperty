@@ -153,7 +153,7 @@ $(document).ready(function () {
                 $arrResult[]=$rowSelect;
             }
             
-        $querySelect2 = "SELECT * FROM activity WHERE agent_id = '{$_SESSION['agent_id']}'"; 
+        $querySelect2 = "SELECT * FROM activity, property, project WHERE activity.property_id = property.property_id AND property.project_id = project.project_id AND agent_id = '{$_SESSION['agent_id']}'"; 
         $resultSelect2 = mysqli_query($link, $querySelect2) or die(mysqli_error($link)); 
         while ($rowSelect2 = mysqli_fetch_assoc($resultSelect2))
             {
@@ -351,6 +351,7 @@ $(document).ready(function () {
                      <thead>
                         <tr>
                         <th>Activity ID:</th>
+                        <th>Project Name:</th>
                         <th>Property ID:</th>
                         <th>Status:</th> 
                         </tr>
@@ -377,8 +378,10 @@ $(document).ready(function () {
                         for ($i=0 ; $i<count($arrResult2); $i++){   ?>
                         <tr>
                         <td> <?php echo $arrResult2[$i]['activity_id']; ?> </td>
+                        <td> <?php echo $arrResult2[$i]['project_name'];?></td>
                         <td> <?php echo $arrResult2[$i]['property_id']; ?></td>
                         <td> <?php echo $arrResult2[$i]['status']; ?> </td>
+                        
                         </tr>
                         <?php }}
                             

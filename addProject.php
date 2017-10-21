@@ -15,7 +15,7 @@ $completePath = $targetPath . $fileName;
         
 if (move_uploaded_file($_FILES['image']['tmp_name'], $completePath)) {
     $queryInsert = "INSERT INTO project 
-        (name, start_date, image)
+        (project_name, start_date, image)
         VALUES ('$name','$startDate','$fileName')";
     
     $resultInsert = mysqli_query($link, $queryInsert) or die;

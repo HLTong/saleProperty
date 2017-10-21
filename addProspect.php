@@ -1,21 +1,21 @@
 <?php
 session_start();
 include "dbFunctions.php";
-$actionDate = $_POST['actionDate'];
-$projectName = $_POST['projectName'];
-$buyer = $_POST['buyer'];
-$mobile = $_POST['mobile'];
-$site = $_POST['site'];
-$knowledge = $_POST['knowledge'];
-$interest = $_POST['interest'];
-$followUp = $_POST['followUp'];
-$deal = $_POST['deal'];
-$dealClosed = $_POST['dealClosed'];
-$agentID = $_SESSION['agent_id'];
+$action_date = $_POST['action_date'];
+$project_name = $_POST['project_name'];
+$buyer_name = $_POST['buyer_name'];
+$buyer_mobile = $_POST['buyer_mobile'];
+$site_visit = $_POST['site_visit'];
+$buyer_knowledge = $_POST['buyer_knowledge'];
+$buyer_interest = $_POST['buyer_interest'];
+$followup_action = $_POST['followup_action'];
+$dead_deal = $_POST['dead_deal'];
+$deal_closed = $_POST['deal_closed'];
+$agent_id = $_SESSION['agent_id'];
 
         $queryInsert = "INSERT INTO prospect 
-                        (agent_id, action_date, project_name, buyer_name, buyer_mobile, site_visit, buyer_knowledge, buyer_interest, followup_action, dead_deal, deal_closed)
-                        VALUES ('$agentID', '$actionDate', '$projectName', '$buyer', '$mobile', '$site', '$knowledge', '$interest', '$followUp', '$deal', '$dealClosed')";
+                        (agent_id, project_id, action_date, buyer_name, buyer_mobile, site_visit, buyer_knowledge, buyer_interest, followup_action, dead_deal, deal_closed)
+                        VALUES ('$agent_id', '$project_name', '$action_date', '$buyer_name', '$buyer_mobile', '$site_visit', '$buyer_knowledge', '$buyer_interest', '$followup_action', '$dead_deal', '$deal_closed')";
         $resultInsert = mysqli_query($link, $queryInsert) or die;
         
 

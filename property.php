@@ -34,8 +34,6 @@ $("#defaultTable").on("click", "td button", function () {
                 $('[name=street]').val(data.street);
                 $('[name=description]').val(data.description);
                 $('[name=target_sale_price]').val(data.target_sale_price);
-                $('[name=actual_sale_price]').val(data.actual_sale_price);
-                $('[name=description]').val(data.description);
                 $('#myModal2').modal('show');  
                 $('#defaultForm')[0].reset();
             },
@@ -155,7 +153,7 @@ $("#defaultTable").on("click", "td button", function () {
        <?php if (isset($arrResult)) { ?> 
            <?php for ($i=0 ; $i<count($arrResult); $i++){   ?> 
         <tr>
-        <?php if ($arrResult[$i]['status'] == "Available") { ?>
+        <?php if ($arrResult[$i]['property_status'] == "Available") { ?>
         <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['property_id']; ?> </a></td>
         <?php } else { ?>
         <td> <?php echo $arrResult[$i]['property_id']; ?> </td>
@@ -166,10 +164,10 @@ $("#defaultTable").on("click", "td button", function () {
         <td> #<?php echo $arrResult[$i]['unit']; ?> </td>
         <td> $<?php echo $arrResult[$i]['target_sale_price']; ?> </td>
         
-        <?php if($arrResult[$i]['status'] == "Available"){?>
-            <td style="color:green;"> <?php echo $arrResult[$i]['status']; ?> </td> 
+        <?php if($arrResult[$i]['property_status'] == "Available"){?>
+            <td style="color:green;"> <?php echo $arrResult[$i]['property_status']; ?> </td> 
         <?php }else{ ?>
-            <td style="color:red;"> <?php echo $arrResult[$i]['status']; ?> </td> 
+            <td style="color:red;"> <?php echo $arrResult[$i]['property_status']; ?> </td> 
             <?php $takenNumber+=1; }?>
         
         <?php if ($_SESSION['role']=="admin") { ?>

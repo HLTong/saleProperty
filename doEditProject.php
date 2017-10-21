@@ -6,7 +6,7 @@ $name = $_POST['name'];
 $startDate = $_POST['start_date'];
 $id = $_POST['project_id']; //from the hidden form field 'id'
 
-$updateQuery = "UPDATE project SET name='$name', start_date='$startDate' WHERE project_id=$id";
+$updateQuery = "UPDATE project SET project_name='$name', start_date='$startDate' WHERE project_id=$id";
 
 $edit = mysqli_query($link, $updateQuery) or die(mysqli_error($link));
 

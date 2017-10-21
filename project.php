@@ -28,8 +28,9 @@ $("#defaultTable").on("click", "td button", function () {
             cache: false,
             dataType: "JSON",
             success: function (data) {
-                $('[name=name]').val(data.name);
+                
                 $('[name=project_id]').val(data.project_id);
+                $('[name=name]').val(data.project_name);
                 $('[name=start_date]').val(data.start_date);
                 $('#myModal2').modal('show');  
                 $('#defaultForm')[0].reset();
@@ -150,7 +151,7 @@ $("#defaultTable").on("click", "td button", function () {
                 $arrResult1[]=$rowSelect1;
             }
     
-       $querySelect2 = "SELECT project.project_id , count(property_id) as 'number' from project LEFT JOIN property ON property.project_id = project.project_id and status ='taken' where project.project_id = " . $arrResult[$i]['project_id'] . " group by project_id";
+       $querySelect2 = "SELECT project.project_id , count(property_id) as 'number' from project LEFT JOIN property ON property.project_id = project.project_id and property_status ='taken' where project.project_id = " . $arrResult[$i]['project_id'] . " group by project_id";
        $resultSelect2 = mysqli_query($link, $querySelect2) or die(mysqli_error($link));
         while ($rowSelect2 = mysqli_fetch_assoc($resultSelect2))
             {
@@ -163,12 +164,12 @@ $("#defaultTable").on("click", "td button", function () {
        
         <?php if ($arrResult1[$i]['number'] != 0) { ?>
             <?php if ((($arrResult2[$i]['number'] /$arrResult1[$i]['number'])*100) != "100.00") { ?>
-                <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['name']; ?>"> <?php echo $arrResult[$i]['name']; ?> </a> </td>
+                <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['project_name']; ?>"> <?php echo $arrResult[$i]['project_name']; ?> </a> </td>
             <?php } else { ?>
                 <td> <?php echo $arrResult[$i]['name']; ?> </td>
             <?php } ?>
         <?php } else { ?>  
-                <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['name']; ?>"> <?php echo $arrResult[$i]['name']; ?> </a> </td>
+                <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['project_name']; ?>"> <?php echo $arrResult[$i]['project_name']; ?> </a> </td>
         <?php } ?>
                 
         <td> <?php echo $arrResult[$i]['start_date']; ?> </td>

@@ -120,6 +120,15 @@ $("#defaultTable").on("click", "td button", function () {
             {
             $arrResult[]=$rowSelect;
             }
+		
+		$querySelect1 = "SELECT image FROM project where project.project_id = " . $id;
+        $resultSelect1 = mysqli_query($link, $querySelect1) or die(mysqli_error($link));
+        
+        while ($rowSelect1 = mysqli_fetch_assoc($resultSelect1))
+            {
+            $arrResult1[]=$rowSelect1;
+            }
+		
         ?>
         
 <div class="container">
@@ -132,7 +141,7 @@ $("#defaultTable").on("click", "td button", function () {
   </h2><br><br>
     
                 <div class="row">
-                <div class="col-sm-5"><img width='90%' src="img/<?php echo $arrResult[0]['image']; ?>" class="img-rounded"/></div>
+                <div class="col-sm-5"><img width='90%' src="img/<?php echo $arrResult1[0]['image']; ?>" class="img-rounded"/></div>
                 <div class="col-sm-7">
     
       

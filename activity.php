@@ -202,7 +202,7 @@ $howmany=mysqli_affected_rows($link);
                        required data-error="Offer Price is required"/>
                 <div class="help-block with-errors"></div>
                 </div>
-            </div>
+            </div>Ï
         
                     <div class="form-group">
                 <label class="control-label col-sm-3">Payment Type:</label>
@@ -262,6 +262,38 @@ $howmany=mysqli_affected_rows($link);
        
    
        <br>
+       <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Document Title </th>
+            <th>Creation Date</th>
+            <th>File</th>
+
+                
+           
+        </tr>
+        </thead>
+        
+<?php  
+include("dbFunctions.php");
+
+$queryDocument = "SELECT * FROM document where property_id= " .$propertyID ;
+$resultDocument = mysqli_query($link, $queryDocument) or die(mysqli_error($link));
+
+$howmany=mysqli_affected_rows($link);
+?>        
+    <tbody>
+      
+  <?php for ($i=0 ; $i<$howmany; $i++){ 
+         $arrResultDocument=  mysqli_fetch_array($resultDocument);?>
+        <tr><td><?php echo $arrResultDocument['title']; ?></td>
+        <td><?php echo $arrResultDocument['creation_date']; ?></td>
+        <td><a href="file\<?php echo $arrResultDocument['url']; ?>" download>  <img src="img/file.jpg" width='20%' class="img-rounded"/>  </a></td>
+         </tr>
+  <?php } ?>
+     
+    </tbody>
+  </table>
      
        
 

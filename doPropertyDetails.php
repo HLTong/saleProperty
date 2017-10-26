@@ -20,7 +20,7 @@ mysqli_close($link);
     include "dbFunctions.php";
     
     $queryStatus = "UPDATE property 
-        SET status = 'Taken' 
+        SET property_status = 'Taken' 
         WHERE property_id = '" . $propertyID . "'"; 
  
 

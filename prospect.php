@@ -122,12 +122,20 @@ $("#defaultTable").on("click", "td button", function () {
                 $arrResult[]=$rowSelect;
             }   
             
-        $querySelect2 = "SELECT * FROM prospect, agent, company, project WHERE prospect.project_id = project.project_id AND agent.agent_id = prospect.agent_id AND agent.company_id = company.company_id  "; 
+        $querySelect2 = "SELECT * FROM project, prospect, agent, company WHERE project.project_id = prospect.project_id AND agent.agent_id = prospect.agent_id AND agent.company_id = company.company_id  "; 
         $resultSelect2 = mysqli_query($link, $querySelect2) or die(mysqli_error($link)); 
         while ($rowSelect2 = mysqli_fetch_assoc($resultSelect2))
             {
                 $arrResult2[]=$rowSelect2;
             }
+        
+        $querySelect3 = "SELECT * FROM project"; 
+        $resultSelect3 = mysqli_query($link, $querySelect3) or die(mysqli_error($link)); 
+        while ($rowSelect3 = mysqli_fetch_assoc($resultSelect3))
+            {
+                $arrResult3[]=$rowSelect3;
+            }    
+            
         ?>
         
 <div class="container">
@@ -169,7 +177,7 @@ $("#defaultTable").on("click", "td button", function () {
                         <th>Date Call/Visit:</th>
                         <th>Buyer's Name:</th> 
                         <th>Contact No:</th>
-                         <th>Project Name:</th>
+                        <th>Project Name:</th>
                         <th>Site Visit:</th>
                         <th>Buyer's Knowledge:</th>
                         <th>Buyer's Interest:</th>
@@ -218,7 +226,7 @@ $("#defaultTable").on("click", "td button", function () {
                         <td> <?php echo $arrResult2[$i]['action_date']; ?></td>
                         <td> <?php echo $arrResult2[$i]['buyer_name']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['buyer_mobile']; ?> </td>
-                        <td> <?php echo $arrResult2[$i]['project_name']; ?> </td>
+                        <td> <?php echo $arrResult3[$i]['project_name']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['site_visit']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['buyer_knowledge']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['buyer_interest']; ?> </td>
@@ -418,7 +426,7 @@ $("#defaultTable").on("click", "td button", function () {
                 
                 <input type="hidden" name="prospect_id" value=""> 
                 
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label class="control-label col-sm-3" for="action_date">Date of Visit/Call:</label>
                     <div class="col-sm-8">
                         <input type="date" class="form-control" id="action_date" name="action_date" readonly>
@@ -432,16 +440,23 @@ $("#defaultTable").on("click", "td button", function () {
                     <label class="control-label col-sm-3">Project Name:</label>
                     <div class="col-sm-8" name="project_name">
                         
-                        <select class="form-control" id="project_name" disabled="true" name="project_name" readonly>
-                        <option value="">-- Please Select --</option>
-                        <option value="Yistana">Yistana</option>
-                        <option value="Sengkang / Punggol D24 - Condominium">Sengkang / Punggol D24 - Condominium</option>
+                        <select class="form-control" id="project_name"  name="project_name" >
+                        
+                        <?php for ($i=0 ; $i<count($arrResult3); $i++){   
+                                if ($_SESSION['prospect_id'] == $arrResult3[$i]['prospect_id']){?>
+                            <option value="<?php echo $arrResult3[$i]['project_id']; ?>" selected="selected"> 
+                                <?php echo $arrResult3[$i]['project_name']; ?> </option>
+                            <?php }else { ?>
+                                
+                                <option value="<?php echo $arrResult3[$i]['company_id']; ?>" > 
+                                <?php echo $arrResult3[$i]['company_name']; ?> </option> <?php
+                            }}?>
                     </select>
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 
-                <br>
+                <br>-->
                 
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="buyer_name">Name of Buyer:</label>

@@ -11,12 +11,12 @@ $output = '';
 
 if (isset($_POST["export_excel"])) 
 {
-    $sql = "SELECT * FROM prospect, agent, company, project WHERE prospect.project_id = project.project_id AND agent.agent_id = prospect.agent_id AND agent.company_id = company.company_id ORDER BY prospect_id DESC";
+    $sql = "SELECT * FROM project, prospect, agent, company WHERE project.project_id = prospect.project_id AND prospect.agent_id = agent.agent_id AND agent.company_id = company.company_id ORDER BY prospect_id DESC";
     $result = mysqli_query($link, $sql);
     if (mysqli_num_rows($result) > 0) 
     {
         $output .= "
-            <table class = 'table' bordered='1'>
+            <table class = 'table table-bordered' bordered='1'>
                 <tr>
                     <th>Prospect ID:</th>
                     <th>Date Call/Visit:</th>

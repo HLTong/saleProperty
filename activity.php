@@ -237,51 +237,12 @@ $howmany=mysqli_affected_rows($link);
       
     <div id="menu3" class="tab-pane fade">
         <h3>Status Update </h3>
-        <button type="button" style="float:right" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Upload Document</button><br><br>
+        
            <?php for ($i=0 ; $i<count($arrResult2); $i++){   ?>
-        <br>
 
-       
-       
-               <input type="hidden" class="form-control" id="activity_id" name="activity_id" value="<?php echo $arrResult2[$i]['activity_id']; ?>">
-                 <input type="hidden" class="form-control" id="status" name="status" value="<?php echo $arrResult2[$i]['status']; ?>">
+            <input type="hidden" class="form-control" id="activity_id" name="activity_id" value="<?php echo $arrResult2[$i]['activity_id']; ?>">
+            <input type="hidden" class="form-control" id="status" name="status" value="<?php echo $arrResult2[$i]['status']; ?>">
         
-       <br><br>
-       <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Document Title </th>
-            <th>Creation Date</th>
-            <th>File</th>
-
-                
-           
-        </tr>
-        </thead>
-        
-        
-<?php  
-include("dbFunctions.php");
-
-$queryDocument = "SELECT * FROM document where property_id= " .$propertyID ;
-$resultDocument = mysqli_query($link, $queryDocument) or die(mysqli_error($link));
-
-$howmany=mysqli_affected_rows($link);
-?>        
-    <tbody>
-      
-  <?php for ($i=0 ; $i<$howmany; $i++){ 
-         $arrResultDocument=  mysqli_fetch_array($resultDocument);?>
-        <tr><td><?php echo $arrResultDocument['title']; ?></td>
-        <td><?php echo $arrResultDocument['creation_date']; ?></td>
-        <td><a href="file\<?php echo $arrResultDocument['url']; ?>" download>  <img src="img/file.jpg" width='20%' class="img-rounded"/>  </a></td>
-         </tr>
-  <?php } ?>
-     
-    </tbody>
-  </table>
-  
-<div>
        <?php if ($arrResult2[$i]['status'] == "Reserved"){ ?>
        <img src="img/1.png" style="float:left" width='60%' class="img-rounded"/>
            
@@ -290,23 +251,15 @@ $howmany=mysqli_affected_rows($link);
        
                   <?php } if ($arrResult2[$i]['status'] == "Contract Signed And Submitted"){ ?>
         <img src="img/3.png" style="float:left" width='60%' class="img-rounded"/>
-       
+       <button type="button" style="float:right" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Upload Document</button><br><br>
+      
                   <?php } if ($arrResult2[$i]['status'] == "Sold"){ ?>
         <img src="img/4.png" style="float:left" width='60%' class="img-rounded"/>
                   <?php } ?>  
        
    
-       <br>
-       
-     
-       <div>
+        <br><br>
 
-    
-       
-
-
-    
-                
         <blockquote class="blockquote blockquote-reverse">
 
         <h3 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Status:  <?php echo $arrResult2[$i]['status'] ?></h3>
@@ -316,10 +269,10 @@ $howmany=mysqli_affected_rows($link);
    
 
         
-         <?php if ($_SESSION['role']=="admin") { ?>
-        <button style="float:right" type="button" id="edit" class="btn btn-default  btn-md">Update Activity Status</button>
-        
-           <?php }} ?>
+        <?php if ($_SESSION['role']=="admin") { ?> 
+            <?php } if ($arrResult2[$i]['status'] != "Contract Signed And Submitted" && $arrResult2[$i]['status'] != "Sold")  { ?>
+                <button style="float:right" type="button" id="edit" class="btn btn-default  btn-md">Update Activity Status</button>
+        <?php }} ?>
 
         
  
@@ -329,7 +282,8 @@ $howmany=mysqli_affected_rows($link);
                 <?php } ?>
         </div>
         
-        <div class="modal fade" id="myModal" role="dialog">
+        
+         <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -363,7 +317,7 @@ $howmany=mysqli_affected_rows($link);
         </div>
         <div class="modal-footer">
 
-            <button type="submit" class="btn btn-primary">Upload Document</button>
+            <button type="submit" class="btn btn-primary" >Upload Document</button>
 
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></form>
         
@@ -371,7 +325,6 @@ $howmany=mysqli_affected_rows($link);
       
     </div>
   </div>
-        
         
         
         

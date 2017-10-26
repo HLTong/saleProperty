@@ -40,7 +40,7 @@
             
             $resultInsert = mysqli_query($link, $queryInsert) or die;
             
-            mysqli_close($link);
+            
         }else {
             echo $fileName;
         }
@@ -49,7 +49,15 @@
 
         <div class="container">
           <h3>The Document has been added!<br/></h3><br> 
-          Go back to <a href="propertyDetails.php?propertyID=<?php echo $propertyID ?>&projectName=<?php echo $projectName?>&projectID=<?php echo $propertyID?>"> View project</a> 
+          <?php if ($_SESSION['role']=="agent") { ?>
+         Go back to <a href="propertyDetails.php?propertyID=<?php echo $propertyID ?>&projectName=<?php echo $projectName?>&projectID=<?php echo $propertyID?>"> View project</a> 
+          <?php mysqli_close($link); } else {?>
+         
+         Go back to <a href="activity.php?property_id=<?php echo $propertyID ?>"> View Activity</a> 
+         <?php $queryUpdate = "Update Activity SET status = 'Sold' ";
+         $resultUpdate = mysqli_query($link, $queryUpdate) or die; 
+         mysqli_close($link);?>
+          <?php } ?>
         </div>
     </body>
 </html>

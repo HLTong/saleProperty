@@ -17,6 +17,92 @@ session_start();
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/feedback.js" type="text/javascript"></script>
         
+        <script>    
+$(document).ready(function () {
+    
+$("#defaultTable").on("click", "td button", function () {
+        var id = $(this).val();
+        //alert(id);
+        
+        $.ajax({
+            url: "http://localhost/sale_property1/getConstructionDetails.php",
+            data: "id=" + id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('#defaultForm2 [name=construction_id]').val(data.construction_id);
+                $('[name=construction_status]').val(data.construction_status);
+                $('[name=latest_handover]').val(data.latest_handover);
+                $('[name=latest_construct_complete]').val(data.latest_construct_complete);
+                $('[name=expect_handover]').val(data.expect_handover);
+                $('[name=expect_construct_complete]').val(data.expect_construct_complete);
+                $('#myModal3').modal('show');  
+                $('#defaultForm')[0].reset();
+            },
+            error: function (obj, textStatus, errorThrown) {
+                console.log("Error " + textStatus + ": " + errorThrown);
+            }
+        });
+    })
+
+    
+      $('#defaultForm2').validator().on('submit', function (e) {
+        if (!e.isDefaultPrevented()) {
+            e.preventDefault();
+            $.ajax({
+                url: "http://localhost/sale_property1/doEditConstruction.php",
+                type: "POST",
+                data: $('#defaultForm2').serialize(),
+                dataType: "JSON",
+                success: function (data) {
+                    $('#myModal3').modal('hide');
+                    location.reload();
+                },
+                error: function ()
+                {
+                    alert('Error adding data');
+                }
+            });
+         }
+    });
+
+
+
+    $("#defaultForm2").on("click", ".btnDelete", function () {
+        var id = $('[name=construction_id]').val(); 
+       //alert(id);
+   
+        $.ajax({
+            url: "http://localhost/sale_property1/deleteConstruction.php",
+            data: "id=" + id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                var r = confirm("confirm to delete?");
+                if (r == true){
+                    location.reload();
+                }
+                else {}
+
+            },
+            error: function (obj, textStatus, errorThrown) {
+                console.log("Error " + textStatus + ": " + errorThrown);
+            }
+        
+        });
+    });
+    
+    
+    
+    
+    })
+    
+    ;
+    
+       </script> 
+        
         
         
 
@@ -29,10 +115,21 @@ session_start();
         $propertyID = $_GET['propertyID'];
         include("navbar.php");
         include("dbFunctions.php");
+        $arrResult2 = array();
         
         $querySelect = "SELECT * FROM property where property_id = " . $propertyID;
-        $resultSelect = mysqli_query($link, $querySelect) or die(mysqli_error($link));               
+        $resultSelect = mysqli_query($link, $querySelect) or die(mysqli_error($link));   
+        
+        $querySelect2 = "SELECT * FROM construction where property_id = " . $propertyID; 
+        $resultSelect2 = mysqli_query($link, $querySelect2) or die(mysqli_error($link)); 
+        while ($rowSelect2 = mysqli_fetch_assoc($resultSelect2))
+            {
+                $arrResult2[]=$rowSelect2;
+            }   
+        
+        
         ?>
+        
 
         <div class="container">
             <?php 
@@ -58,6 +155,7 @@ session_start();
     <li class="active"><a data-toggle="tab" href="#home">Property Details</a></li>
     <li><a data-toggle="tab" href="#menu1">Property Documentation</a></li>
     <li><a data-toggle="tab" href="#menu2">Property Pricing</a></li>
+    <li><a data-toggle="tab" href="#menu3">Construction</a></li>
   </ul>
 
   <div class="tab-content">
@@ -117,7 +215,7 @@ $howmany=mysqli_affected_rows($link);
          $arrResultDocument=  mysqli_fetch_array($resultDocument);?>
         <tr><td><?php echo $arrResultDocument['title']; ?></td>
         <td><?php echo $arrResultDocument['creation_date']; ?></td>
-        <td><a href="file\<?php echo $arrResultDocument['url']; ?>" download>  <img src="img/file.jpg" width='20%' class="img-rounded"/>  </a></td>
+        <td><a href="file\<?php echo $arrResultDocument['url']; ?>" download>  <img src="img/file.jpg" width='15%' class="img-rounded"/>  </a></td>
          </tr>
   <?php } ?>
      
@@ -194,6 +292,68 @@ $howmany=mysqli_affected_rows($link);
     </div>
       
       
+    <div id="menu3" class="tab-pane fade">
+    <h3>Construction Status
+    <?php if ($_SESSION['role']=="admin") { ?>
+        <?php if ($arrResult2 != null) { ?>
+            <button style="float:right;" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal2" disabled='true'>Add Construction Details</button>
+        <?php } else { ?>
+            <button style="float:right;" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal2">Add Construction Details</button>
+    <?php }} ?></h3>
+        
+        <br><br> 
+        <table class="table table-hover" id="defaultTable">
+            <thead>
+                <tr>
+                    <th>Construction Status:</th>
+                    <th>Latest Handover Date:</th>
+                    <th>Latest Construction Complete:</th>
+                    <th>Expected Handover Date:</th>
+                    <th>Expected Construction Complete:</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                 <?php for ($i=0 ; $i<count($arrResult2); $i++){   ?>
+                        <tr>
+                        <td> <?php echo $arrResult2[$i]['construction_status']; ?></td>
+                        
+                        <td> <?php 
+                        if ($arrResult2[$i]['latest_handover'] == "0000-00-00"){
+                        echo " " ; 
+                        } else { echo $arrResult2[$i]['latest_handover']; 
+                        } ?> </td>
+                        
+                        <td> <?php 
+                        if ($arrResult2[$i]['latest_construct_complete'] == "0000-00-00"){
+                        echo " " ; 
+                        } else { echo $arrResult2[$i]['latest_construct_complete']; 
+                        } ?> </td>
+                        
+                        <td> <?php 
+                        if ($arrResult2[$i]['expect_handover'] == "0000-00-00"){
+                        echo " " ; 
+                        } else { echo $arrResult2[$i]['expect_handover']; 
+                        } ?> </td>
+                        
+                        <td> <?php 
+                        if ($arrResult2[$i]['expect_construct_complete'] == "0000-00-00"){
+                        echo " " ; 
+                        } else { echo $arrResult2[$i]['expect_construct_complete']; 
+                        } ?> </td>
+                        
+                        <?php if ($_SESSION['role']=="admin") { ?>
+                        <td> <button  type="button" id="EditButton" class="btn btn-info btn-sm" value="<?php echo $arrResult2[$i]['construction_id']; ?>" data-toggle="modal" data-target="#myModal3" ><img src="img/edit.png" width="20px"></button></td>
+                        <?php } ?>
+                        </tr>
+                        <?php } ?>
+            </tbody>
+        </table>
+        
+        
+          
+    </div>
+      
       
 
 </div>
@@ -251,7 +411,175 @@ $howmany=mysqli_affected_rows($link);
       
     </div>
   </div>
-   
+        
+        
+                <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h2 class="modal-title">Add Construction Details</h2></center>
+        </div>
+        <div class="modal-body">
+          
+                
+            <form id="defaultForm" class="form-horizontal" role="form" action="addConstruction.php" method="post" data-toggle="validator">
+                
+                <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>" >
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Construction Status:</label>
+                    <div class="col-sm-8" name="construction_status">
+                        
+                        <select class="form-control" id="construction_status" name="construction_status" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Ready Stock">Ready Stock</option>
+                        <option value="Indent">Indent</option>
+                    </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="latest_handover">Latest Handover Date:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="latest_handover" name="latest_handover"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="latest_construct_complete">Latest Construct Complete:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="latest_construct_complete" name="latest_construct_complete"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="expect_handover">Expected Handover:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="expect_handover" name="expect_handover"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="expect_construct_complete">Expected Completion:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="expect_construct_complete" name="expect_construct_complete"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                
+                
+                <div class="modal-footer"> <button type="submit" class="btn btn-primary">Add Construction</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+           </form>
+        </div>
+      </div> 
+    </div>
+</div> 
+        
+        
+    <div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h2 class="modal-title">Edit Construction Details</h2></center>
+        </div>
+        <div class="modal-body">
+            <p>
+                
+            <form id="defaultForm2" class="form-horizontal" role="form" action="#" method="post" data-toggle="validator">
+                
+                <input type="hidden" name="construction_id" value=""> 
+                
+               <div class="form-group">
+                    <label class="control-label col-sm-3">Construction Status:</label>
+                    <div class="col-sm-8" name="construction_status">
+                        
+                        <select class="form-control" id="construction_status" name="construction_status" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Ready Stock">Ready Stock</option>
+                        <option value="Indent">Indent</option>
+                        <option value="Under Construction">Under Construction</option>
+                        <option value="Handed Over">Handed Over</option>
+                        
+                    </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="latest_handover">Latest Handover Date:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="latest_handover" name="latest_handover"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="latest_construct_complete">Latest Construct Complete:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="latest_construct_complete" name="latest_construct_complete"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="expect_handover">Expected Handover:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="expect_handover" name="expect_handover"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="expect_construct_complete">Expected Completion:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="expect_construct_complete" name="expect_construct_complete"/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            <br>
+              
+  <div class="modal-footer"> 
+            <button type="submit"  class="btn btn-primary">Edit Construction</button>
+            <button type="button" name="deleteProject" class="btnDelete btn btn-danger">Delete Construction</button>
+        </div> </form>
+
+      </div> 
+    </div>
+    </div>
+        </div> 
+        
+        
+
+         
         
         
         

@@ -120,15 +120,14 @@ $("#defaultTable").on("click", "td button", function () {
             {
             $arrResult[]=$rowSelect;
             }
-		
-		$querySelect1 = "SELECT image FROM project where project.project_id = " . $id;
+            
+        $querySelect1 = "SELECT image FROM project where project.project_id = " . $id;
         $resultSelect1 = mysqli_query($link, $querySelect1) or die(mysqli_error($link));
         
         while ($rowSelect1 = mysqli_fetch_assoc($resultSelect1))
             {
             $arrResult1[]=$rowSelect1;
             }
-		
         ?>
         
 <div class="container">
@@ -149,11 +148,11 @@ $("#defaultTable").on("click", "td button", function () {
   <table class="table table-hover" id="defaultTable">
     <thead>
       <tr>
-        <th>Property ID</th>
+        <th>ID</th>
         <th>Block</th>
         <th>Street Name</th>
-        <th>Unit Number</th>
-        <th>Target Sale Price</th>
+        <th>Unit</th>
+        <th>Sale Price</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -162,10 +161,15 @@ $("#defaultTable").on("click", "td button", function () {
        <?php if (isset($arrResult)) { ?> 
            <?php for ($i=0 ; $i<count($arrResult); $i++){   ?> 
         <tr>
-        <?php if ($arrResult[$i]['property_status'] == "Available") { ?>
-        <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['property_id']; ?> </a></td>
-        <?php } else { ?>
-        <td> <?php echo $arrResult[$i]['property_id']; ?> </td>
+        <?php if ($_SESSION['role']=="agent") { ?>
+            <?php if ($arrResult[$i]['property_status'] == "Available") { ?>
+                <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['property_id']; ?> </a></td>
+            <?php } else { ?>
+                <td> <?php echo $arrResult[$i]['property_id']; ?> </td>
+        <?php }} ?>
+                
+        <?php if ($_SESSION['role']=="admin") { ?> 
+            <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['property_id']; ?> </a></td>
         <?php } ?>
         
         <td> <?php echo $arrResult[$i]['block']; ?>  </td>

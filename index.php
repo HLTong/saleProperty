@@ -183,7 +183,7 @@ $(document).ready(function () {
             <br>
              
                  
-            <div class="well well-lg" style="height:850px">
+            <div class="well well-lg" style="height:1200px">
                     
                 <center><img width='50%' src="img/person.png" class="img-rounded"/>  <Br><br><?php echo $_SESSION['name']; ?> (<?php echo $_SESSION['role']; ?>)</center><br><hr>
                          
@@ -225,7 +225,7 @@ $(document).ready(function () {
 <div class="col-sm-9">
     <br>
 
-    <div class="well well-lg" style="height:850px">
+    <div class="well well-lg" style="height:1200px">
         
         
          
@@ -537,7 +537,7 @@ $(document).ready(function () {
             <div class="form-group"> 
                 <label class="control-label col-sm-3" for="company">Company Name:</label> 
                 <div class="col-sm-8"> 
-                    <input type="text" class="form-control" id="company" name="company" required> 
+                    <input type="text" class="form-control" id="company" name="company" required data-error="Company Name is required."> 
                     <div class="help-block with-errors"></div>
                 </div> 
             </div> 
@@ -547,7 +547,7 @@ $(document).ready(function () {
              <div class="form-group"> 
                 <label class="control-label col-sm-3" for="tel">Company Tel:</label> 
                 <div class="col-sm-8"> 
-                    <input type="tel" class="form-control" id="tel" name="tel" required> 
+                    <input type="tel" class="form-control" id="tel" name="tel" required data-error="Company Tel Number is required."> 
                     <div class="help-block with-errors"></div>
                 </div> 
             </div> 
@@ -575,8 +575,7 @@ $(document).ready(function () {
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="name">Full Name:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" name="name" 
-                        required data-error="Full name is required"/>
+                        <input type="text" class="form-control" id="name" name="name" required data-error="Full Name is required.">
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
@@ -587,8 +586,7 @@ $(document).ready(function () {
                     <div class="ui-widget">
                     <label class="control-label col-sm-3" for="mobile">Contact Number:</label>
                     <div class="col-sm-8"> 
-                        <input type="text" class="form-control" id="mobile" name="mobile"  
-                               requried required data-error="Mobile number is required"/>
+                        <input type="text" class="form-control" id="mobile" name="mobile" required data-error="Mobile Number is required.">
                         <div class="help-block with-errors"></div>
                     </div>
                     </div>
@@ -599,7 +597,8 @@ $(document).ready(function () {
                 <div class="form-group">
                     <label class="control-label col-sm-3">Company:</label>
                     <div class="col-sm-8" name="company">
-                        <select class="form-control" id="company" name="company">
+                        <select class="form-control" id="company" name="company" required data-error="Please select a Company.">
+                            <option value="">-- Please Select --</option>
                             <?php for ($i=0 ; $i<count($arrResult); $i++){   ?>
                             <option value="<?php echo $arrResult[$i]['company_id']; ?>"> 
                                 <?php echo $arrResult[$i]['company_name']; ?> </option>
@@ -618,7 +617,7 @@ $(document).ready(function () {
                 <div class="col-sm-8">
                 <input type="text" class="form-control" id="name" name="username" 
                        required data-minlength="6" data-minlength-error="Your name at least must have 6 letters" 
-                       required data-error="Username is required"/>
+                       required data-error="Username is required.">
                 <div class="help-block with-errors"></div>
                 </div>
             </div>
@@ -629,7 +628,7 @@ $(document).ready(function () {
                 <label class="control-label col-sm-3">Role:</label>
                 <div class="col-sm-8" name="role">
                         
-                    <select class="form-control" id="role" name="role" required>
+                    <select class="form-control" id="role" name="role" required data-error="Please specify a role.">
                         <option value="">--Please Select--</option>
                         <option value="agent">agent</option>
                         <option value="admin">admin</option>
@@ -650,8 +649,8 @@ $(document).ready(function () {
                 <label class="control-label col-sm-3" for="password">Password:</label>
                 <div class="col-sm-8">
                 <input type="password" class="form-control" id="password" name="password" 
-                       required data-minlength="6" data-minlength-error="Your password should be minimum 6 letters" 
-                       required data-error="Password is required"/>
+                       required data-minlength="6" data-minlength-error="Your password should be minimum 6 letters." 
+                       required data-error="Password is required."/>
                 <div class="help-block with-errors"></div>
                 </div>
             </div>
@@ -662,8 +661,8 @@ $(document).ready(function () {
                 <label class="control-label col-sm-3" for="ComfirmPassword">Confirm Password:</label>
                 <div class="col-sm-8">
                 <input type="password" class="form-control" id="ComfirmPassword" name="ComfirmPassword" 
-                       required data-minlength="6" data-minlength-error="Your password should be minimum 6 letters" accept=" 
-                       "required data-error="Password is required"/>
+                       required data-minlength="6" data-minlength-error="Your password should be minimum 6 letters." accept=" 
+                       "required data-error="Password is required."/>
                 <div class="help-block with-errors"></div>
                 </div>
             </div>

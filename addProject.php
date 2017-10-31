@@ -4,6 +4,7 @@ include "dbFunctions.php";
 
 $name = $_POST['name'];
 $startDate = $_POST['start_date'];
+header("location:project.php");
 
 $targetPath = "img/";
 

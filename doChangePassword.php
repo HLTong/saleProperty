@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("dbFunctions.php");
+header("location:index.php");
 
 $query = "SELECT * FROM agent WHERE username='" . $_SESSION['username'] . "'";
 $result = mysqli_query($link, $query) or die(mysqli_error($link));

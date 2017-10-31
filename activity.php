@@ -270,7 +270,7 @@ $howmany=mysqli_affected_rows($link);
 
         
         <?php if ($_SESSION['role']=="admin") { ?> 
-            <?php } if ($arrResult2[$i]['status'] != "Contract Signed And Submitted" && $arrResult2[$i]['status'] != "Sold")  { ?>
+        <?php } if ($arrResult2[$i]['status'] != "Sold")  { ?>
                 <button style="float:right" type="button" id="edit" class="btn btn-default  btn-md">Update Activity Status</button>
         <?php }} ?>
 

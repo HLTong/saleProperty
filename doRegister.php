@@ -7,6 +7,7 @@ $username = $_POST['username'];
 $role = $_POST['role'];
 $password = SHA1($_POST['password']);
 $ComfirmPassword = SHA1($_POST['ComfirmPassword']);
+header("location:index.php");
 
 if ($password != $ComfirmPassword ) 
     {

@@ -320,25 +320,25 @@ $howmany=mysqli_affected_rows($link);
                         
                         <td> <?php 
                         if ($arrResult2[$i]['latest_handover'] == "0000-00-00"){
-                        echo " " ; 
+                        echo "-" ; 
                         } else { echo $arrResult2[$i]['latest_handover']; 
                         } ?> </td>
                         
                         <td> <?php 
                         if ($arrResult2[$i]['latest_construct_complete'] == "0000-00-00"){
-                        echo " " ; 
+                        echo "-" ; 
                         } else { echo $arrResult2[$i]['latest_construct_complete']; 
                         } ?> </td>
                         
                         <td> <?php 
                         if ($arrResult2[$i]['expect_handover'] == "0000-00-00"){
-                        echo " " ; 
+                        echo "-" ; 
                         } else { echo $arrResult2[$i]['expect_handover']; 
                         } ?> </td>
                         
                         <td> <?php 
                         if ($arrResult2[$i]['expect_construct_complete'] == "0000-00-00"){
-                        echo " " ; 
+                        echo "-" ; 
                         } else { echo $arrResult2[$i]['expect_construct_complete']; 
                         } ?> </td>
                         

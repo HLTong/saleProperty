@@ -2,6 +2,7 @@
 include "dbFunctions.php";
 $company = $_POST['company'];
 $telNo = $_POST['tel'];
+header("location:index.php");
 
         $queryInsert = "INSERT INTO company 
                         (company_name, tel_number)

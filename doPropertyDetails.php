@@ -7,6 +7,7 @@ $propertyID = $_POST['property_id'];
 $paymentType = $_POST['payment_type'];
 $agentID = $_SESSION['agent_id'];
 $status = "Reserved";
+header("location:index.php");
 
 $queryInsert = "UPDATE property SET
                 actual_sale_price='$actual_sale_price',

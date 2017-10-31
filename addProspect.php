@@ -12,6 +12,7 @@ $followup_action = $_POST['followup_action'];
 $dead_deal = $_POST['dead_deal'];
 $deal_closed = $_POST['deal_closed'];
 $agent_id = $_SESSION['agent_id'];
+header("location:prospect.php");
 
         $queryInsert = "INSERT INTO prospect 
                         (agent_id, project_id, action_date, buyer_name, buyer_mobile, site_visit, buyer_knowledge, buyer_interest, followup_action, dead_deal, deal_closed)

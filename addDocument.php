@@ -54,9 +54,8 @@
           <?php mysqli_close($link); } else {?>
          
          Go back to <a href="activity.php?property_id=<?php echo $propertyID ?>"> View Activity</a> 
-         <?php $queryUpdate = "Update Activity SET status = 'Sold' ";
-         $resultUpdate = mysqli_query($link, $queryUpdate) or die; 
-         mysqli_close($link);?>
+         
+
           <?php } ?>
         </div>
     </body>

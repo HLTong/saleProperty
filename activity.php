@@ -60,7 +60,7 @@ session_start();
         include("dbFunctions.php");
         $arrResult2 = array();
         
-        $querySelect = "SELECT * FROM property,project where project.project_id = property.project_id and property_id = " . $propertyID;
+        $querySelect = "SELECT * FROM property, project where project.project_id = property.project_id and property_id = " . $propertyID;
         $resultSelect = mysqli_query($link, $querySelect) or die(mysqli_error($link));     
         
         $querySelect2 = "SELECT * FROM activity where property_id = " . $propertyID;
@@ -75,8 +75,8 @@ session_start();
         <div class="container">
             <?php 
                 while ($rowSelect=mysqli_fetch_assoc($resultSelect)){
-                    $projectName = $rowSelect['project_id'];
-                    $projectID = $rowSelect['project_name'];
+                    $projectID = $rowSelect['project_id'];
+                    $projectName = $rowSelect['project_name'];
                     $block = $rowSelect['block']; 
                     $street = $rowSelect['street']; 
                     $unit = $rowSelect['unit'];
@@ -88,7 +88,7 @@ session_start();
             
         <h3><?php echo $projectName . ": " .$street; ?></h3><br><br>
         <div class="row">
-            <div class="col-sm-5"><img width='90%' src="img/<?php echo $rowSelect['image']; ?>" class="img-rounded"/></div>
+            <div class="col-sm-5"><img width='90%' src="img/<?php echo $rowSelect['property_image']; ?>" class="img-rounded"/></div>
             <div class="col-sm-7">
                     
         <ul class="nav nav-tabs">
@@ -101,7 +101,7 @@ session_start();
         <div class="tab-content">
         
         <div id="home" class="tab-pane fade in active">
-        <h3>Property ID: <?php echo $propertyID; ?></h3>
+        <h3>Property Details</h3>
       <p>
 
           <br>
@@ -135,7 +135,7 @@ session_start();
         <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Document Title </th>
+            <th>Document Title</th>
             <th>Creation Date</th>
             <th>File</th>
                 

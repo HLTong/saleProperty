@@ -162,15 +162,21 @@ $("#defaultTable").on("click", "td button", function () {
         <tr>  
         <td> <?php echo $arrResult[$i]['project_id']; ?> </td>
        
-        <?php if ($arrResult1[$i]['number'] != 0) { ?>
-            <?php if ((($arrResult2[$i]['number'] /$arrResult1[$i]['number'])*100) != "100.00") { ?>
+        <?php if ($_SESSION['role']=="agent") { ?>
+            <?php if ($arrResult1[$i]['number'] != 0) { ?>
+                <?php if ((($arrResult2[$i]['number'] /$arrResult1[$i]['number'])*100) != "100.00") { ?>
+                    <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['project_name']; ?>"> <?php echo $arrResult[$i]['project_name']; ?> </a> </td>
+                <?php } else { ?>
+                    <td> <?php echo $arrResult[$i]['project_name']; ?> </td>
+                <?php } ?>
+            <?php } else { ?>  
                 <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['project_name']; ?>"> <?php echo $arrResult[$i]['project_name']; ?> </a> </td>
-            <?php } else { ?>
-                <td> <?php echo $arrResult[$i]['name']; ?> </td>
             <?php } ?>
-        <?php } else { ?>  
-                <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['project_name']; ?>"> <?php echo $arrResult[$i]['project_name']; ?> </a> </td>
-        <?php } ?>
+        <?php } else { ?>   
+            <td> <a href="property.php?property_id=<?php echo $arrResult[$i]['project_id']; ?>&projectName=<?php echo $arrResult[$i]['project_name']; ?>"> <?php echo $arrResult[$i]['project_name']; ?> </a> </td> 
+        <?php } ?>    
+                
+                
                 
         <td> <?php echo $arrResult[$i]['start_date']; ?> </td>
 

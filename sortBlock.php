@@ -7,21 +7,19 @@ $password = "";
 $db = "sale_property1";
 $link = mysqli_connect($host, $username, $password, $db);
 
- if ($_SESSION['role']=="admin") {
+if ($_SESSION['role']=="admin") {
 
-$agentName = Array();
+$TheStatus = Array();
 //SQL query returns multiple database records
 $query = "SELECT * FROM project, property, activity, agent, company "
         . "WHERE project.project_id = property.project_id AND property.property_id = activity.property_id "
-        . "AND activity.agent_id = agent.agent_id AND agent.company_id = company.company_id ORDER BY name";
+        . "AND activity.agent_id = agent.agent_id AND agent.company_id = company.company_id ORDER BY block";
 $result = mysqli_query($link,$query);
 
 while ($row =  mysqli_fetch_assoc($result)){
-    $agentName[]=$row;
+    $TheStatus[]=$row;
 }
 
-echo json_encode($agentName);
+echo json_encode($TheStatus);
 
-
-
- }?>
+}?>

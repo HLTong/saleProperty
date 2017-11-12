@@ -15,13 +15,20 @@ if (isset($_POST["export_excel"]))
     $result = mysqli_query($link, $sql);
     if (mysqli_num_rows($result) > 0) 
     {
-        $output .= "
+        header("Content-Type: application/xls");
+        header("Content-Disposition:attachment; filename=Prospect.xls");
+        echo "sep=;\n";
+        echo "Prospect ID;Date Call/Visit;Buyer's Name;Contact No;Email;Project Name;Site Visit;Buyer's Knowledge;Buyer's Interest;Follow-up;Dead Deal;Deal Closed;Agent Name;Agent Company\n";
+
+        
+        /*$output .= "
             <table class = 'table table-bordered' bordered='1'>
                 <tr>
                     <th>Prospect ID:</th>
                     <th>Date Call/Visit:</th>
                     <th>Buyer's Name:</th> 
                     <th>Contact No:</th>
+                    <th>Email:</th>
                     <th>Project Name:</th>
                     <th>Site Visit:</th>
                     <th>Buyer's Knowledge:</th>
@@ -32,39 +39,24 @@ if (isset($_POST["export_excel"]))
                     <th>Agent Name:</th>
                     <th>Agent Company:</th>
                 </tr>
-        ";
+        ";*/
         
         while($row= mysqli_fetch_array($result))
         {
-            $output .= "
-                <tr>
-                    <td> $row[prospect_id] </td>
-                    <td> $row[action_date] </td>
-                    <td> $row[buyer_name] </td>
-                    <td> $row[buyer_mobile] </td>
-                    <td> $row[project_name] </td>
-                    <td> $row[site_visit] </td>
-                    <td> $row[buyer_knowledge] </td>
-                    <td> $row[buyer_interest] </td>
-                    <td> $row[followup_action] </td>
-                    <td> $row[dead_deal] </td>
-                        
+            echo $row['prospect_id'].";".$row['action_date'].';'.$row['buyer_name'].';'.$row['buyer_mobile'].';'.$row['buyer_email'].';'.$row['project_name'] . ';'.$row['site_visit'].';'.$row['buyer_knowledge'].';'.$row['buyer_interest'].';'.$row['followup_action'].';'.$row['dead_deal'].';';
 
-                     
-                    <td> <?php if $row[deal_closed] == '0000-00-00'){
-                        echo ' ' ; 
-                        } else { echo $row[deal_closed] ?></td>
+            
+                    if ($row['deal_closed'] == '0000-00-00'){
+                        echo " ;" ; 
+                        } else { echo $row['deal_closed'] . ';'; }
 
 
-                    <td> $row[name] </td>
-                    <td> $row[company_name] </td>
-                </tr>
-            ";
+                    echo $row['name'].';'.$row['company_name'];
+
         }
-        $output .='</table>';
-        header("Content-Type: application/xls");
-        header("Content-Disposition:attachment; filename=Prospect.xls");
-        echo $output;
+        //$output .='</table>';
+        
+        //echo $output;
         
     }
     

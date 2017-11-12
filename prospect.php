@@ -34,6 +34,7 @@ $("#defaultTable").on("click", "td button", function () {
                 $('[name=action_date]').val(data.action_date);
                 $('[name=buyer_name]').val(data.buyer_name);
                 $('[name=buyer_mobile]').val(data.buyer_mobile);
+                $('[name=buyer_email]').val(data.buyer_email);
                 $('[name=project_name]').val(data.project_name);
                 $('[name=site_visit]').val(data.site_visit);
                 $('[name=buyer_knowledge]').val(data.buyer_knowledge);
@@ -122,7 +123,7 @@ $("#defaultTable").on("click", "td button", function () {
                 $arrResult[]=$rowSelect;
             }   
             
-        $querySelect2 = "SELECT * FROM project, prospect, agent, company WHERE project.project_id = prospect.project_id AND agent.agent_id = prospect.agent_id AND agent.company_id = company.company_id  "; 
+        $querySelect2 = "SELECT * FROM project, prospect, agent, company WHERE project.project_id = prospect.project_id AND prospect.agent_id = agent.agent_id AND agent.company_id = company.company_id  "; 
         $resultSelect2 = mysqli_query($link, $querySelect2) or die(mysqli_error($link)); 
         while ($rowSelect2 = mysqli_fetch_assoc($resultSelect2))
             {
@@ -157,6 +158,7 @@ $("#defaultTable").on("click", "td button", function () {
                         <th>Date Call/Visit:</th>
                         <th>Buyer's Name:</th> 
                         <th>Contact No:</th>
+                        <th>Email:</th>
                         <th>Project Name:</th>
                         <th>Site Visit:</th>
                         <th>Buyer's Knowledge:</th>
@@ -177,6 +179,7 @@ $("#defaultTable").on("click", "td button", function () {
                         <th>Date Call/Visit:</th>
                         <th>Buyer's Name:</th> 
                         <th>Contact No:</th>
+                        <th>Email:</th>
                         <th>Project Name:</th>
                         <th>Site Visit:</th>
                         <th>Buyer's Knowledge:</th>
@@ -199,6 +202,7 @@ $("#defaultTable").on("click", "td button", function () {
                         <td> <?php echo $arrResult[$i]['action_date']; ?></td>
                         <td> <?php echo $arrResult[$i]['buyer_name']; ?> </td>
                         <td> <?php echo $arrResult[$i]['buyer_mobile']; ?> </td>
+                        <td> <?php echo $arrResult[$i]['buyer_email']; ?> </td>
                         <td> <?php echo $arrResult[$i]['project_name']; ?> </td>
                         <td> <?php echo $arrResult[$i]['site_visit']; ?> </td>
                         <td> <?php echo $arrResult[$i]['buyer_knowledge']; ?> </td>
@@ -226,7 +230,8 @@ $("#defaultTable").on("click", "td button", function () {
                         <td> <?php echo $arrResult2[$i]['action_date']; ?></td>
                         <td> <?php echo $arrResult2[$i]['buyer_name']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['buyer_mobile']; ?> </td>
-                        <td> <?php echo $arrResult3[$i]['project_name']; ?> </td>
+                        <td> <?php echo $arrResult2[$i]['buyer_email']; ?> </td>
+                        <td> <?php echo $arrResult2[$i]['project_name']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['site_visit']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['buyer_knowledge']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['buyer_interest']; ?> </td>
@@ -331,6 +336,15 @@ $("#defaultTable").on("click", "td button", function () {
                 <br>
                 
                 <div class="form-group">
+                    <label class="control-label col-sm-3" for="buyer_email">Email Address:</label>
+                    <div class="col-sm-8"> 
+                        <input type="text" class="form-control" id="buyer_email" name="buyer_email"  
+                        <div class="help-block with-errors"></div>
+                </div>
+                
+                <br>
+                
+                <div class="form-group">
                     <label class="control-label col-sm-3">Site Visit:</label>
                     <div class="col-sm-8" name="site_visit">
                         
@@ -426,7 +440,7 @@ $("#defaultTable").on("click", "td button", function () {
                 
                 <input type="hidden" name="prospect_id" value=""> 
                 
-<!--                <div class="form-group">
+                <div class="form-group">
                     <label class="control-label col-sm-3" for="action_date">Date of Visit/Call:</label>
                     <div class="col-sm-8">
                         <input type="date" class="form-control" id="action_date" name="action_date" readonly>
@@ -437,26 +451,14 @@ $("#defaultTable").on("click", "td button", function () {
                 <br>
                 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Project Name:</label>
-                    <div class="col-sm-8" name="project_name">
-                        
-                        <select class="form-control" id="project_name"  name="project_name" >
-                        
-                        <?php for ($i=0 ; $i<count($arrResult3); $i++){   
-                                if ($_SESSION['prospect_id'] == $arrResult3[$i]['prospect_id']){?>
-                            <option value="<?php echo $arrResult3[$i]['project_id']; ?>" selected="selected"> 
-                                <?php echo $arrResult3[$i]['project_name']; ?> </option>
-                            <?php }else { ?>
-                                
-                                <option value="<?php echo $arrResult3[$i]['company_id']; ?>" > 
-                                <?php echo $arrResult3[$i]['company_name']; ?> </option> <?php
-                            }}?>
-                    </select>
-                        <div class="help-block with-errors"></div>
+                    <label class="control-label col-sm-3" for="project_name">Project Name:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="project_name" name="project_name" readonly>
+                    <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 
-                <br>-->
+                <br>
                 
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="buyer_name">Name of Buyer:</label>
@@ -477,6 +479,15 @@ $("#defaultTable").on("click", "td button", function () {
                     </div>
                 </div>
                 
+                <br>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="buyer_email">Email Address:</label>
+                    <div class="col-sm-8"> 
+                        <input type="text" class="form-control" id="buyer_email" name="buyer_email"  
+                        <div class="help-block with-errors"></div>
+                </div>
+                    
                 <br>
                 
                 <div class="form-group">

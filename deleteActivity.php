@@ -3,14 +3,21 @@ session_start();
 include("dbFunctions.php");
 $id = $_GET['activity_id'];
 $property_id = $_GET['property_id'];
-$query = "DELETE FROM activity WHERE activity_id=$id";
+header("location:index.php");
+
+$query = "DELETE FROM document WHERE property_id=$property_id";
 $result = mysqli_query($link, $query) or die(mysqli_error($link));
+
+$query2 = "DELETE FROM activity WHERE activity_id=$id";
+$result2 = mysqli_query($link, $query2) or die(mysqli_error($link));
+
 mysqli_close($link);
 
 include "dbFunctions.php";
     
     $updateQuery = "UPDATE property 
-        SET status = 'Active' 
+        SET property_status = 'Available',
+        actual_sale_price = '0'
         WHERE property_id = '" . $property_id . "'"; 
 
 $edit = mysqli_query($link, $updateQuery) or die(mysqli_error($link));

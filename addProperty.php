@@ -1,3 +1,11 @@
+<?php
+        session_start();
+        include("navbar.php");
+        include("dbFunctions.php");
+        
+        $project_id = $_POST['project_id'];
+        $project_name = $_POST['project_name'];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,16 +20,12 @@
         <script src="js/jquery.raty.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/feedback.js" type="text/javascript"></script>
+        <meta http-equiv="refresh" content="2;url=property.php?property_id=<?php echo $project_id; ?>&projectName=<?php echo $project_name; ?>">
     </head>
     
     <body>
-        <?php
-        session_start();
-        include("navbar.php");
-        include("dbFunctions.php");
-        
-        $project_id = $_POST['project_id'];
-        $project_name = $_POST['project_name'];
+
+<?php
         $block = $_POST['block'];
         $unit = $_POST['unit'];
         $street = $_POST['street'];
@@ -38,8 +42,8 @@
         
         if (move_uploaded_file($_FILES['image']['tmp_name'], $completePath)) {
             $queryInsert = "INSERT INTO property
-                (project_id, block, unit, street, property_status, target_sale_price, description, image)
-                VALUES ('$project_id','$block','$unit','$street','Available','$target_sale_price','$description','$fileName')";
+                (project_id, block, unit, street, property_status, target_sale_price, description, property_image)
+                VALUES ('$project_id', '$block','$unit','$street','Available','$target_sale_price','$description','$fileName')";
             
             $resultInsert = mysqli_query($link, $queryInsert) or die;
             

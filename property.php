@@ -148,10 +148,9 @@ $("#defaultTable").on("click", "td button", function () {
   <table class="table table-hover" id="defaultTable">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Unit / Lots</th>
         <th>Block</th>
         <th>Street Name</th>
-        <th>Unit</th>
         <th>Sale Price</th>
         <th>Status</th>
       </tr>
@@ -163,18 +162,17 @@ $("#defaultTable").on("click", "td button", function () {
         <tr>
         <?php if ($_SESSION['role']=="agent") { ?>
             <?php if ($arrResult[$i]['property_status'] == "Available") { ?>
-                <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['property_id']; ?> </a></td>
+                <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['unit']; ?> </a></td>
             <?php } else { ?>
-                <td> <?php echo $arrResult[$i]['property_id']; ?> </td>
+                <td> <?php echo $arrResult[$i]['unit']; ?> </td>
         <?php }} ?>
                 
         <?php if ($_SESSION['role']=="admin") { ?> 
-            <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['property_id']; ?> </a></td>
+            <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['unit']; ?> </a></td>
         <?php } ?>
         
         <td> <?php echo $arrResult[$i]['block']; ?>  </td>
         <td> <?php echo $arrResult[$i]['street']; ?> </td>
-        <td> #<?php echo $arrResult[$i]['unit']; ?> </td>
         <td> $<?php echo $arrResult[$i]['target_sale_price']; ?> </td>
         
         <?php if($arrResult[$i]['property_status'] == "Available"){?>

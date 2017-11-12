@@ -9,10 +9,11 @@ $link = mysqli_connect($host, $username, $password, $db);
 
  if ($_SESSION['role']=="admin") {
 
-$agentName = Array();
+$agentCompany = Array();
 //SQL query returns multiple database records
-$query = "Select * FROM activity, agent, company WHERE agent.agent_id = activity.agent_id "
-                . "AND agent.company_id = company.company_id ORDER BY company_name";
+$query = "SELECT * FROM project, property, activity, agent, company "
+        . "WHERE project.project_id = property.project_id AND property.property_id = activity.property_id "
+        . "AND activity.agent_id = agent.agent_id AND agent.company_id = company.company_id ORDER BY company_name";
 $result = mysqli_query($link,$query);
 
 while ($row =  mysqli_fetch_assoc($result)){

@@ -55,24 +55,60 @@ $(document).ready(function () {
                         success: function(msg) {
                             response = $.parseJSON(msg);
                             for (i = 0; i < response.length; i++) {                                
-                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].property_id + "> " + response[i].property_id + "</a></td>" 
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
                                         + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
                             }
                          }
                     });
                 });
                 
-         $("#P_id").click(function() {
+                        $("#ProjectName").click(function() {
                      $("#ActivityTable").html("");
                     //alert('you clicked the button');
                    $.ajax({
                         type: "GET",
-                        url: "sortPropertyID.php",
+                        url: "sortProjectName.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
                             for (i = 0; i < response.length; i++) {                                
-                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].property_id + "> " + response[i].property_id + "</a></td>" 
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
+                                        + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
+                            }
+                         }
+                    });
+                });
+                
+                    $("#BlockNo").click(function() {
+                     $("#ActivityTable").html("");
+                    //alert('you clicked the button');
+                   $.ajax({
+                        type: "GET",
+                        url: "sortBlock.php",
+                        cache: false,
+                        success: function(msg) {
+                            response = $.parseJSON(msg);
+                            for (i = 0; i < response.length; i++) {                                
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
+                                        + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
+                            }
+                         }
+                    });
+                });
+                
+                
+                
+         $("#ApartmentID").click(function() {
+                     $("#ActivityTable").html("");
+                    //alert('you clicked the button');
+                   $.ajax({
+                        type: "GET",
+                        url: "sortApartment.php",
+                        cache: false,
+                        success: function(msg) {
+                            response = $.parseJSON(msg);
+                            for (i = 0; i < response.length; i++) {                                
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
                                         + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
                             }
                          }
@@ -89,7 +125,7 @@ $(document).ready(function () {
                         success: function(msg) {
                             response = $.parseJSON(msg);
                             for (i = 0; i < response.length; i++) {                                
-                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].property_id + "> " + response[i].property_id + "</a></td>" 
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
                                         + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
                             }
                          }
@@ -108,7 +144,7 @@ $(document).ready(function () {
                         success: function(msg) {
                             response = $.parseJSON(msg);
                             for (i = 0; i < response.length; i++) {                                
-                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].property_id + "> " + response[i].property_id + "</a></td>" 
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
                                         + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
                             }
                          }
@@ -126,12 +162,14 @@ $(document).ready(function () {
                         success: function(msg) {
                             response = $.parseJSON(msg);
                             for (i = 0; i < response.length; i++) {                                
-                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].property_id + "> " + response[i].property_id + "</a></td>" 
+                                $("#ActivityTable").append("<tr><td>" + response[i].activity_id + "</td>" + "<td>" + response[i].project_name + "</td>" + "<td>" + response[i].block + "</td>" + "<td>" + " <a href=" + "activity.php?property_id="  + response[i].unit + "> " + response[i].unit + "</a></td>" 
                                         + "<td>" + response[i].name + "</td>" + "<td>" + response[i].company_name + "</td>" + "<td>" + response[i].status + "</td></tr>");                                         
                             }
                          }
                     });
                 });
+                
+
     
 });
 </script>
@@ -160,7 +198,7 @@ $(document).ready(function () {
                 $arrResult2[]=$rowSelect2;
             }   
             
-        $querySelect3 = "SELECT * FROM activity, agent, company WHERE agent.agent_id = activity.agent_id AND agent.company_id = company.company_id  "; 
+        $querySelect3 = "SELECT * FROM project, property, activity, agent, company WHERE project.project_id = property.project_id AND property.property_id = activity.property_id AND activity.agent_id = agent.agent_id AND agent.company_id = company.company_id  "; 
         $resultSelect3 = mysqli_query($link, $querySelect3) or die(mysqli_error($link)); 
         while ($rowSelect3 = mysqli_fetch_assoc($resultSelect3))
             {
@@ -339,7 +377,9 @@ $(document).ready(function () {
                     <thead>
                         <tr>
                      <th> <a href="sortActivityID.php" id="A_id" onclick="return false">Activity ID:</a></th>
-                     <th> <a href="sortPropertyID.php" id="P_id" onclick="return false"> Property ID:</a></th>
+                     <th> <a href="sortProjectName.php" id="ProjectName" onclick="return false">Project Name:</a></th>
+                     <th> <a href="sortBlock.php" id="BlockNo" onclick="return false">Block:</a></th>
+                     <th> <a href="sortApartment.php" id="ApartmentID" onclick="return false"> Unit / Lots:</a></th>
                      <th> <a href="sortAgentName.php" id="AgentName" onclick="return false"> Agent Name:</a></th>
                      <th> <a href="sortAgentCompany.php" id="AgentCompany" onclick="return false"> Agent Company:</a></th>
                      <th> <a href="sortStatus.php" id="TheStatus" onclick="return false">Status:</a></th> 
@@ -350,9 +390,9 @@ $(document).ready(function () {
                     
                      <thead>
                         <tr>
-                        <th>Activity ID:</th>
                         <th>Project Name:</th>
-                        <th>Property ID:</th>
+                        <th>Block:</th>
+                        <th>Unit / Lots:</th>
                         <th>Status:</th> 
                         </tr>
                     </thead>
@@ -377,9 +417,9 @@ $(document).ready(function () {
                         if ($_SESSION['role']=="agent") {
                         for ($i=0 ; $i<count($arrResult2); $i++){   ?>
                         <tr>
-                        <td> <?php echo $arrResult2[$i]['activity_id']; ?> </td>
                         <td> <?php echo $arrResult2[$i]['project_name'];?></td>
-                        <td> <?php echo $arrResult2[$i]['property_id']; ?></td>
+                        <td> <?php echo $arrResult2[$i]['block'];?></td>
+                        <td> <?php echo $arrResult2[$i]['unit']; ?></td>
                         <td> <?php echo $arrResult2[$i]['status']; ?> </td>
                         
                         </tr>
@@ -391,10 +431,13 @@ $(document).ready(function () {
                         <tr>
                             
                         <td> <?php echo $arrResult3[$i]['activity_id']; ?> </td>
-                        <td> <a href="activity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>"> <?php echo $arrResult3[$i]['property_id']; ?> </a></td>
+                        <td> <?php echo $arrResult3[$i]['project_name'];?></td>
+                        <td> <?php echo $arrResult3[$i]['block'];?></td>                        
+                        <td> <a href="activity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>"> <?php echo $arrResult3[$i]['unit']; ?> </a></td>
                         <td> <?php echo $arrResult3[$i]['name']; ?> </td>
                         <td> <?php echo $arrResult3[$i]['company_name']; ?> </td>
                         <td> <?php echo $arrResult3[$i]['status']; ?> </td>
+                        <td><a href="deleteActivity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>&activity_id=<?php echo $arrResult3[$i]['activity_id']; ?>">delete</a> </td>
  
                         <?php  
                         }}

@@ -146,7 +146,7 @@ $("#defaultTable").on("click", "td button", function () {
             
             <h3><?php echo $projectName . ": " .$street; ?></h3><br><br>
             <div class="row">
-                <div class="col-sm-5"><img width='90%' src="img/<?php echo $rowSelect['image']; ?>" class="img-rounded"/></div>
+                <div class="col-sm-5"><img width='90%' src="img/<?php echo $rowSelect['property_image']; ?>" class="img-rounded"/></div>
                 <div class="col-sm-7">
   
                     
@@ -155,12 +155,15 @@ $("#defaultTable").on("click", "td button", function () {
     <li class="active"><a data-toggle="tab" href="#home">Property Details</a></li>
     <li><a data-toggle="tab" href="#menu1">Property Documentation</a></li>
     <li><a data-toggle="tab" href="#menu2">Property Pricing</a></li>
+    
+    <?php if ($_SESSION['role'] == "admin") { ?>
     <li><a data-toggle="tab" href="#menu3">Construction</a></li>
+    <?php } ?>
   </ul>
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-        <h3>Property ID: <?php echo $property; ?></h3>
+        <h3>Property Details:</h3>
       <p>
 
           <br>

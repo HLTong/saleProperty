@@ -95,7 +95,9 @@ session_start();
             <li class="active"><a data-toggle="tab" href="#home">Property Details</a></li>
             <li><a data-toggle="tab" href="#menu1">Property Documentation</a></li>
             <li><a data-toggle="tab" href="#menu2">Property Pricing</a></li>
+            <?php if ($_SESSION['role'] == "admin") { ?>
             <li><a data-toggle="tab" href="#menu3">Status Update</a></li>
+            <?php } ?>
         </ul>
                 
         <div class="tab-content">
@@ -125,8 +127,7 @@ session_start();
     <div id="menu1" class="tab-pane fade">
         <h3>Property Documentation</h3>
         
-        <br>Agent to upload Buyer's ID
-        <br>Agent to upload Buyer's Booking Transaction Receipt
+        <br>Agent to upload Buyer's ID and Buyer's Booking Transaction Receipt
         <p>
         <br>
         <?php if ($_SESSION['role'] == "agent") { ?>
@@ -176,61 +177,8 @@ $howmany=mysqli_affected_rows($link);
         <blockquote class="blockquote blockquote-reverse">
             
             <h3 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Target Sale price: $ <?php echo $target_price ?></h3>
-            <?php if ($_SESSION['role']=="admin") { ?>
             <footer class="blockquote-footer"><span class="glyphicon glyphicon-cloud"></span> Sale price: $ <?php echo $actual_price ?></footer>
-            <?php } ?>
-        
         </blockquote>
-        
-        <?php if ($_SESSION['role']=="agent") { ?>
-
-        <form id="defaultForm" class="form-horizontal" role="form" action="doPropertyDetails.php" method="post" data-toggle="validator">
-               
-            <input type="hidden" class="form-control" id="property_id" name="property_id" value="<?php echo $propertyID; ?>"> 
-     
- 
-
-                
-    
-                
-    <br>
-    
-<div class="form-group">
-                <label class="control-label col-sm-3" for="actual_sale_price">Offer Price:</label>
-                <div class="col-sm-9">
-                <input type="text" class="form-control" id="actual_sale_price" name="actual_sale_price" 
-                       required data-error="Offer Price is required"/>
-                <div class="help-block with-errors"></div>
-                </div>
-            </div>
-        
-                    <div class="form-group">
-                <label class="control-label col-sm-3">Payment Type:</label>
-                <div class="col-sm-9" name="payment_type">
-                        
-                    <select class="form-control" id="payment_type" name="payment_type" required>
-                        <option value="">--Please Select--</option>
-                        <option value="loan">Loan</option>
-                        <option value="cash">Cash</option>
-                    </select>
-                        <div class="help-block with-errors"></div>
-                </div>
-            </div>
-                       
- 
-    
-    <br>
-
-
- 
-   
-    <div class="form-group"> 
-        <div class="col-sm-offset-3 col-sm-10">
-            <button type="submit" class="btn btn-primary">Add Activity</button>
-        </div>
-    </div>
-        </form>
-        <?php } ?>
     </div>
       
       

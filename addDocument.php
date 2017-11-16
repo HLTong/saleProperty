@@ -11,6 +11,9 @@
         <script src="js/validator.min.js" type="text/javascript"></script>
         <script src="js/jquery.raty.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        
+
+   
     </head>
     
     <body>
@@ -46,6 +49,12 @@
         }
      
         ?>
+        
+        <?php if ($_SESSION['role']=="agent") { ?>
+        <meta http-equiv="refresh" content="2;url=propertyDetails.php?propertyID=<?php echo $propertyID ?>&projectName=<?php echo $projectName?>&projectID=<?php echo $propertyID?>">
+        <?php } else {?>
+        <meta http-equiv="refresh" content="2;url=activity.php?property_id=<?php echo $propertyID ?>">
+        <?php } ?>
 
         <div class="container">
           <h3>The Document has been added!<br/></h3><br> 

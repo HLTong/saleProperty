@@ -7,10 +7,11 @@ $latest_handover = $_POST['latest_handover'];
 $latest_construct_complete = $_POST['latest_construct_complete'];
 $expect_handover = $_POST['expect_handover'];
 $expect_construct_complete = $_POST['expect_construct_complete'];
+$progress_status = $_POST['progress_status'];
 
         $queryInsert = "INSERT INTO construction 
-                        (property_id, construction_status, latest_handover, latest_construct_complete, expect_handover, expect_construct_complete)
-                        VALUES ('$propertyID', '$construction_status', '$latest_handover', '$latest_construct_complete', '$expect_handover', '$expect_construct_complete')";
+                        (property_id, construction_status, latest_handover, latest_construct_complete, expect_handover, expect_construct_complete, progress_status)
+                        VALUES ('$propertyID', '$construction_status', '$latest_handover', '$latest_construct_complete', '$expect_handover', '$expect_construct_complete', '$progress_status')";
         $resultInsert = mysqli_query($link, $queryInsert) or die;
         
 

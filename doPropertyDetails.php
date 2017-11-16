@@ -5,13 +5,17 @@ include "dbFunctions.php";
 $actual_sale_price = $_POST['actual_sale_price'];
 $propertyID = $_POST['property_id'];
 $paymentType = $_POST['payment_type'];
+$otherPayment = $_POST['new_textbox'];
+$promotion = $_POST['promotion'];
 $agentID = $_SESSION['agent_id'];
 $status = "Reserved";
 header("location:index.php");
 
 $queryInsert = "UPDATE property SET
                 actual_sale_price='$actual_sale_price',
-                payment_type = '$paymentType'
+                payment_type = '$paymentType',
+                other_payment = '$otherPayment',
+                promotion = '$promotion'
                 WHERE property_id= $propertyID";
 
 $resultInsert = mysqli_query($link, $queryInsert) or die;

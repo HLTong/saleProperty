@@ -419,7 +419,7 @@ $(document).ready(function () {
                         <tr>
                         <td> <?php echo $arrResult2[$i]['project_name'];?></td>
                         <td> <?php echo $arrResult2[$i]['block'];?></td>
-                        <td> <?php echo $arrResult2[$i]['unit']; ?></td>
+                        <td> <a href="activity.php?property_id=<?php echo $arrResult2[$i]['property_id']; ?>"> <?php echo $arrResult2[$i]['unit']; ?> </a></td>
                         <td> <?php echo $arrResult2[$i]['status']; ?> </td>
                         
                         </tr>

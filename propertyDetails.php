@@ -101,7 +101,14 @@ $("#defaultTable").on("click", "td button", function () {
     
     ;
     
-       </script> 
+function paymentOnchange(){
+    var pay_type = document.getElementById('payment_type').value 
+    if(pay_type == "Other")
+        document.getElementById("new_textbox").style.display="block";
+    else
+        document.getElementById("new_textbox").style.display="none";
+}
+ </script>
         
         
         
@@ -269,14 +276,33 @@ $howmany=mysqli_affected_rows($link);
                 <label class="control-label col-sm-3">Payment Type:</label>
                 <div class="col-sm-9" name="payment_type">
                         
-                    <select class="form-control" id="payment_type" name="payment_type" required>
+                    <select class="form-control" id="payment_type" name="payment_type" onChange="paymentOnchange();" required>
                         <option value="">--Please Select--</option>
                         <option value="loan">Loan</option>
                         <option value="cash">Cash</option>
+                        <option>Other</option>
                     </select>
                         <div class="help-block with-errors"></div>
                 </div>
             </div>
+    
+    <div class="form-group">
+                <label class="control-label col-sm-3" for="new_textbox">If Others, Please Specify:</label>
+                <div class="col-sm-9">
+               <input type="text" name="new_textbox" id="new_textbox" style="display:none;">
+                <div class="help-block with-errors"></div>
+                </div>
+            </div>
+    
+    <div class="form-group">
+                <label class="control-label col-sm-3" for="promotion">Promotion:</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control" id="promotion" name="promotion"/>
+                <div class="help-block with-errors"></div>
+                </div>
+            </div>
+    
+    
                        
  
     
@@ -445,8 +471,20 @@ $howmany=mysqli_affected_rows($link);
                     </div>
                 </div>
                 
-                <br>
-                
+                <div class ="form-group">
+                    <label class="control-label col-sm-3">Progress of Construction:</label>
+                    <div class="col-sm-8" name="progress_status">
+                        <input type="checkbox" value ="Foundation"/> Foundation <br>
+                        <input type="checkbox" value ="Roof"/> Roof <br>
+                        <input type="checkbox" value ="Handover"/> Handover <br>
+                        <input type="checkbox" value ="Electricity"/> Electricity <br>
+                        <input type="checkbox" value ="Drainage"/> Drainage <br>
+                        <input type="checkbox" value ="IMB"/> IMB <br>
+                        <input type="checkbox" value ="Certificate"/> Certificate 
+                    <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                    
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="latest_handover">Latest Handover Date:</label>
                     <div class="col-sm-8">

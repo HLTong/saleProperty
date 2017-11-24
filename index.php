@@ -8,14 +8,14 @@ session_start();
         <title>Sale Property</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validator.min.js" type="text/javascript"></script>
-        <script src="js/jquery.raty.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/feedback.js" type="text/javascript"></script>
+        <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="./js/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./js/validator.min.js" type="text/javascript"></script>
+        <script src="./js/jquery.raty.min.js" type="text/javascript"></script>
+        <script src="./js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./js/feedback.js" type="text/javascript"></script>
         
 <script>
          
@@ -29,7 +29,7 @@ $(document).ready(function () {
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
             $.ajax({
-                url: "http://localhost/sale_property1/doEditAgent.php",
+                url: "./doEditAgent.php",
                 type: "POST",
                 data: $('#defaultForm').serialize(),
                 dataType: "JSON",
@@ -50,7 +50,7 @@ $(document).ready(function () {
                     //alert('you clicked the button');
                     $.ajax({
                         type: "GET",
-                        url: "sortActivityID.php",
+                        url: "./sortActivityID.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
@@ -67,7 +67,7 @@ $(document).ready(function () {
                     //alert('you clicked the button');
                    $.ajax({
                         type: "GET",
-                        url: "sortProjectName.php",
+                        url: "./sortProjectName.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
@@ -84,7 +84,7 @@ $(document).ready(function () {
                     //alert('you clicked the button');
                    $.ajax({
                         type: "GET",
-                        url: "sortBlock.php",
+                        url: "./sortBlock.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
@@ -103,7 +103,7 @@ $(document).ready(function () {
                     //alert('you clicked the button');
                    $.ajax({
                         type: "GET",
-                        url: "sortApartment.php",
+                        url: "./sortApartment.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
@@ -139,7 +139,7 @@ $(document).ready(function () {
                     //alert('you clicked the button');
                    $.ajax({
                         type: "GET",
-                        url: "sortAgentCompany.php",
+                        url: "./sortAgentCompany.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
@@ -157,7 +157,7 @@ $(document).ready(function () {
                     //alert('you clicked the button');
                    $.ajax({
                         type: "GET",
-                        url: "sortStatus.php",
+                        url: "./sortStatus.php",
                         cache: false,
                         success: function(msg) {
                             response = $.parseJSON(msg);
@@ -376,13 +376,13 @@ $(document).ready(function () {
                     <?php if ($_SESSION['role']=="admin") {  ?> 
                     <thead>
                         <tr>
-                     <th> <a href="sortActivityID.php" id="A_id" onclick="return false">Activity ID:</a></th>
-                     <th> <a href="sortProjectName.php" id="ProjectName" onclick="return false">Project Name:</a></th>
-                     <th> <a href="sortBlock.php" id="BlockNo" onclick="return false">Block:</a></th>
-                     <th> <a href="sortApartment.php" id="ApartmentID" onclick="return false"> Unit / Lots:</a></th>
-                     <th> <a href="sortAgentName.php" id="AgentName" onclick="return false"> Agent Name:</a></th>
-                     <th> <a href="sortAgentCompany.php" id="AgentCompany" onclick="return false"> Agent Company:</a></th>
-                     <th> <a href="sortStatus.php" id="TheStatus" onclick="return false">Status:</a></th> 
+                     <th> <a href="./sortActivityID.php" id="A_id" onclick="return false">Activity ID:</a></th>
+                     <th> <a href="./sortProjectName.php" id="ProjectName" onclick="return false">Project Name:</a></th>
+                     <th> <a href="./sortBlock.php" id="BlockNo" onclick="return false">Block:</a></th>
+                     <th> <a href="./sortApartment.php" id="ApartmentID" onclick="return false"> Unit / Lots:</a></th>
+                     <th> <a href="./sortAgentName.php" id="AgentName" onclick="return false"> Agent Name:</a></th>
+                     <th> <a href="./sortAgentCompany.php" id="AgentCompany" onclick="return false"> Agent Company:</a></th>
+                     <th> <a href="./sortStatus.php" id="TheStatus" onclick="return false">Status:</a></th> 
                         </tr>
                     </thead>
                     
@@ -419,7 +419,7 @@ $(document).ready(function () {
                         <tr>
                         <td> <?php echo $arrResult2[$i]['project_name'];?></td>
                         <td> <?php echo $arrResult2[$i]['block'];?></td>
-                        <td> <a href="activity.php?property_id=<?php echo $arrResult2[$i]['property_id']; ?>"> <?php echo $arrResult2[$i]['unit']; ?> </a></td>
+                        <td> <a href="./activity.php?property_id=<?php echo $arrResult2[$i]['property_id']; ?>"> <?php echo $arrResult2[$i]['unit']; ?> </a></td>
                         <td> <?php echo $arrResult2[$i]['status']; ?> </td>
                         
                         </tr>
@@ -433,11 +433,11 @@ $(document).ready(function () {
                         <td> <?php echo $arrResult3[$i]['activity_id']; ?> </td>
                         <td> <?php echo $arrResult3[$i]['project_name'];?></td>
                         <td> <?php echo $arrResult3[$i]['block'];?></td>                        
-                        <td> <a href="activity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>"> <?php echo $arrResult3[$i]['unit']; ?> </a></td>
+                        <td> <a href="./activity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>"> <?php echo $arrResult3[$i]['unit']; ?> </a></td>
                         <td> <?php echo $arrResult3[$i]['name']; ?> </td>
                         <td> <?php echo $arrResult3[$i]['company_name']; ?> </td>
                         <td> <?php echo $arrResult3[$i]['status']; ?> </td>
-                        <td><a href="deleteActivity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>&activity_id=<?php echo $arrResult3[$i]['activity_id']; ?>">delete</a> </td>
+                        <td><a href="./deleteActivity.php?property_id=<?php echo $arrResult3[$i]['property_id']; ?>&activity_id=<?php echo $arrResult3[$i]['activity_id']; ?>">delete</a> </td>
  
                         <?php  
                         }}
@@ -820,7 +820,7 @@ $(document).ready(function () {
         <?php }else {?>
         <div class="container">
             <h3>You are not Login!<br/><br></h3> 
-            Please <a href='login.php'>Login</a></div>
+            Please <a href='./login.php'>Login</a></div>
         <?php } ?>    
     </body>
 </html>

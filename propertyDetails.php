@@ -8,14 +8,14 @@ session_start();
         <title>Sale Property</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validator.min.js" type="text/javascript"></script>
-        <script src="js/jquery.raty.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/feedback.js" type="text/javascript"></script>
+        <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="./js/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./js/validator.min.js" type="text/javascript"></script>
+        <script src="./js/jquery.raty.min.js" type="text/javascript"></script>
+        <script src="./js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./js/feedback.js" type="text/javascript"></script>
         
         <script>    
 $(document).ready(function () {
@@ -25,7 +25,7 @@ $("#defaultTable").on("click", "td button", function () {
         //alert(id);
         
         $.ajax({
-            url: "http://localhost/sale_property1/getConstructionDetails.php",
+            url: "./getConstructionDetails.php",
             data: "id=" + id,
             type: "GET",
             cache: false,
@@ -74,7 +74,7 @@ $("#defaultTable").on("click", "td button", function () {
        //alert(id);
    
         $.ajax({
-            url: "http://localhost/sale_property1/deleteConstruction.php",
+            url: "./deleteConstruction.php",
             data: "id=" + id,
             type: "GET",
             cache: false,
@@ -225,7 +225,7 @@ $howmany=mysqli_affected_rows($link);
          $arrResultDocument=  mysqli_fetch_array($resultDocument);?>
         <tr><td><?php echo $arrResultDocument['title']; ?></td>
         <td><?php echo $arrResultDocument['creation_date']; ?></td>
-        <td><a href="file\<?php echo $arrResultDocument['url']; ?>" download>  <img src="img/file.jpg" width='15%' class="img-rounded"/>  </a></td>
+        <td><a href="file\<?php echo $arrResultDocument['url']; ?>" download>  <img src="./img/file.jpg" width='15%' class="img-rounded"/>  </a></td>
          </tr>
   <?php } ?>
      
@@ -252,7 +252,7 @@ $howmany=mysqli_affected_rows($link);
         
         <?php if ($_SESSION['role']=="agent") { ?>
 
-        <form id="defaultForm" class="form-horizontal" role="form" action="doPropertyDetails.php" method="post" data-toggle="validator">
+        <form id="defaultForm" class="form-horizontal" role="form" action="./doPropertyDetails.php" method="post" data-toggle="validator">
                
             <input type="hidden" class="form-control" id="property_id" name="property_id" value="<?php echo $propertyID; ?>"> 
      

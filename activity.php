@@ -8,14 +8,14 @@ session_start();
         <title>Sale Property</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validator.min.js" type="text/javascript"></script>
-        <script src="js/jquery.raty.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/feedback.js" type="text/javascript"></script>
+        <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="./js/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./js/validator.min.js" type="text/javascript"></script>
+        <script src="./js/jquery.raty.min.js" type="text/javascript"></script>
+        <script src="./js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./js/feedback.js" type="text/javascript"></script>
         
         <script>
             
@@ -31,7 +31,7 @@ session_start();
                     $.ajax({
                         
                         type: "GET",
-                        url: "http://localhost/sale_property1/doEditActivity.php",
+                        url: "./doEditActivity.php",
                         data: "activity_id="+ id + "&status="+ status,
                         cache: false,
                         dataType: "JSON",
@@ -56,8 +56,8 @@ session_start();
         <?php
 
         $propertyID = $_GET['property_id'];
-        include("navbar.php");
-        include("dbFunctions.php");
+        include("./navbar.php");
+        include("./dbFunctions.php");
         $arrResult2 = array();
         
         $querySelect = "SELECT * FROM property, project where project.project_id = property.project_id and property_id = " . $propertyID;

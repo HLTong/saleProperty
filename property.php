@@ -8,21 +8,21 @@ session_start();
         <title>Sale Property</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validator.min.js" type="text/javascript"></script>
-        <script src="js/jquery.raty.min.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/feedback.js" type="text/javascript"></script>
+        <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="./js/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="./js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./js/validator.min.js" type="text/javascript"></script>
+        <script src="./js/jquery.raty.min.js" type="text/javascript"></script>
+        <script src="./js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="./js/feedback.js" type="text/javascript"></script>
             <script>    
 $(document).ready(function () {
     
 $("#defaultTable").on("click", "td button", function () {
         var id = $(this).val();
         $.ajax({
-            url: "http://localhost/sale_property1/getPropertyDetails.php",
+            url: "./getPropertyDetails.php",
             data: "id=" + id,
             type: "GET",
             cache: false,
@@ -48,7 +48,7 @@ $("#defaultTable").on("click", "td button", function () {
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
             $.ajax({
-                url: "http://localhost/sale_property1/doEditProperty.php",
+                url: "./doEditProperty.php",
                 type: "POST",
                 data: $('#defaultForm2').serialize(),
                 dataType: "JSON",
@@ -73,7 +73,7 @@ $("#defaultTable").on("click", "td button", function () {
 
                 
         $.ajax({
-            url: "http://localhost/sale_property1/deleteProperty.php",
+            url: "./deleteProperty.php",
             data: "id=" + id,
             type: "GET",
             cache: false,
@@ -162,13 +162,13 @@ $("#defaultTable").on("click", "td button", function () {
         <tr>
         <?php if ($_SESSION['role']=="agent") { ?>
             <?php if ($arrResult[$i]['property_status'] == "Available") { ?>
-                <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['unit']; ?> </a></td>
+                <td><a href="./propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['unit']; ?> </a></td>
             <?php } else { ?>
                 <td> <?php echo $arrResult[$i]['unit']; ?> </td>
         <?php }} ?>
                 
         <?php if ($_SESSION['role']=="admin") { ?> 
-            <td><a href="propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['unit']; ?> </a></td>
+            <td><a href="./propertyDetails.php?propertyID=<?php echo $arrResult[$i]['property_id']; ?>&projectName=<?php echo $projectName; ?>&projectID=<?php echo $id; ?>"><?php echo $arrResult[$i]['unit']; ?> </a></td>
         <?php } ?>
         
         <td> <?php echo $arrResult[$i]['block']; ?>  </td>
@@ -182,7 +182,7 @@ $("#defaultTable").on("click", "td button", function () {
             <?php $takenNumber+=1; }?>
         
         <?php if ($_SESSION['role']=="admin") { ?>
-        <td> <button  type="button" class="btn btn-info btn-sm" value="<?php echo $arrResult[$i]['property_id']; ?>" data-toggle="modal" data-target="#myModal2" ><img src="img/edit.png" width="20px"></button></td>
+        <td> <button  type="button" class="btn btn-info btn-sm" value="<?php echo $arrResult[$i]['property_id']; ?>" data-toggle="modal" data-target="#myModal2" ><img src="./img/edit.png" width="20px"></button></td>
         <?php } ?>
         </tr> 
        <?php } }
@@ -205,7 +205,7 @@ $("#defaultTable").on("click", "td button", function () {
         <div class="modal-body">
            
                 
-            <form id="defaultForm" class="form-horizontal" role="form" action="addProperty.php" method="post" data-toggle="validator" enctype="multipart/form-data">
+            <form id="defaultForm" class="form-horizontal" role="form" action="./addProperty.php" method="post" data-toggle="validator" enctype="multipart/form-data">
             
             <input type="hidden" name="project_id" value="<?php echo $id; ?>" >    
             <input type="hidden" name="project_name" value="<?php echo $projectName; ?>" > 

@@ -7,11 +7,22 @@ $latest_handover = $_POST['latest_handover'];
 $latest_construct_complete = $_POST['latest_construct_complete'];
 $expect_handover = $_POST['expect_handover'];
 $expect_construct_complete = $_POST['expect_construct_complete'];
+
+
 $progress_status = $_POST['progress_status'];
+$text = "";
+
+for($i=0; $i<count($progress_status);$i++){
+    $text = $text . $progress_status[$i]." ";  
+    
+    
+}
+
+
 
         $queryInsert = "INSERT INTO construction 
                         (property_id, construction_status, latest_handover, latest_construct_complete, expect_handover, expect_construct_complete, progress_status)
-                        VALUES ('$propertyID', '$construction_status', '$latest_handover', '$latest_construct_complete', '$expect_handover', '$expect_construct_complete', '$progress_status')";
+                        VALUES ('$propertyID', '$construction_status', '$latest_handover', '$latest_construct_complete', '$expect_handover', '$expect_construct_complete', '$text')";
         $resultInsert = mysqli_query($link, $queryInsert) or die;
         
 
@@ -41,6 +52,8 @@ $progress_status = $_POST['progress_status'];
         <div class="container">
           <h3>This construction Details has been added!<br/></h3><br>
              Go back to <a href='index.php'>Home</a> 
+             
+             <?php echo $text;?>
         </div>
     </body>
 </html>

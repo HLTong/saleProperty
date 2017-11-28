@@ -473,14 +473,14 @@ $howmany=mysqli_affected_rows($link);
                 
                 <div class ="form-group">
                     <label class="control-label col-sm-3">Progress of Construction:</label>
-                    <div class="col-sm-8" name="progress_status">
-                        <input type="checkbox" value ="Foundation"/> Foundation <br>
-                        <input type="checkbox" value ="Roof"/> Roof <br>
-                        <input type="checkbox" value ="Handover"/> Handover <br>
-                        <input type="checkbox" value ="Electricity"/> Electricity <br>
-                        <input type="checkbox" value ="Drainage"/> Drainage <br>
-                        <input type="checkbox" value ="IMB"/> IMB <br>
-                        <input type="checkbox" value ="Certificate"/> Certificate 
+                    <div class="col-sm-8" >
+                        <input type="checkbox" name="progress_status[]" value ="Foundation"/> Foundation <br>
+                        <input type="checkbox" name="progress_status[]" value ="Roof"/> Roof <br>
+                        <input type="checkbox" name="progress_status[]" value ="Handover"/> Handover <br>
+                        <input type="checkbox" name="progress_status[]" value ="Electricity"/> Electricity <br>
+                        <input type="checkbox" name="progress_status[]" value ="Drainage"/> Drainage <br>
+                        <input type="checkbox" name="progress_status[]" value ="IMB"/> IMB <br>
+                        <input type="checkbox" name="progress_status[]"  value ="Certificate"/> Certificate 
                     <div class="help-block with-errors"></div>
                     </div>
                 </div>

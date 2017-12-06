@@ -33,6 +33,7 @@ $("#defaultTable").on("click", "td button", function () {
             success: function (data) {
                 $('#defaultForm2 [name=construction_id]').val(data.construction_id);
                 $('[name=construction_status]').val(data.construction_status);
+                $('[name=progress_status]').val(data.progress_status);
                 $('[name=latest_handover]').val(data.latest_handover);
                 $('[name=latest_construct_complete]').val(data.latest_construct_complete);
                 $('[name=expect_handover]').val(data.expect_handover);
@@ -335,10 +336,12 @@ $howmany=mysqli_affected_rows($link);
             <thead>
                 <tr>
                     <th>Construction Status:</th>
+                    <th>Construction Progress:</th>
                     <th>Latest Handover Date:</th>
                     <th>Latest Construction Complete:</th>
                     <th>Expected Handover Date:</th>
                     <th>Expected Construction Complete:</th>
+                    
                 </tr>
             </thead>
             
@@ -346,6 +349,7 @@ $howmany=mysqli_affected_rows($link);
                  <?php for ($i=0 ; $i<count($arrResult2); $i++){   ?>
                         <tr>
                         <td> <?php echo $arrResult2[$i]['construction_status']; ?></td>
+                        <td> <?php echo $arrResult2[$i]['progress_status']; ?></td>
                         
                         <td> <?php 
                         if ($arrResult2[$i]['latest_handover'] == "0000-00-00"){
@@ -566,6 +570,20 @@ $howmany=mysqli_affected_rows($link);
                     </div>
                 </div>
                 
+                                <div class ="form-group">
+                    <label class="control-label col-sm-3">Progress of Construction:</label>
+                    <div class="col-sm-8" >
+                        <input type="checkbox" name="progress_status[]" value ="Foundation"/> Foundation <br>
+                        <input type="checkbox" name="progress_status[]" value ="Roof"/> Roof <br>
+                        <input type="checkbox" name="progress_status[]" value ="Handover"/> Handover <br>
+                        <input type="checkbox" name="progress_status[]" value ="Electricity"/> Electricity <br>
+                        <input type="checkbox" name="progress_status[]" value ="Drainage"/> Drainage <br>
+                        <input type="checkbox" name="progress_status[]" value ="IMB"/> IMB <br>
+                        <input type="checkbox" name="progress_status[]" value ="Certificate"/> Certificate 
+                    <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                                   
                 <br>
                 
                 <div class="form-group">

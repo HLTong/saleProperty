@@ -3,6 +3,7 @@
 include("dbFunctions.php");
 
 $construction_status = $_POST['construction_status'];
+$progress_status = $_POST['progress_status'];
 $latest_handover = $_POST['latest_handover'];
 $latest_construct_complete = $_POST['latest_construct_complete'];
 $expect_handover = $_POST['expect_handover'];
@@ -12,6 +13,7 @@ $id = $_POST['construction_id']; //from the hidden form field 'id'
 $updateQuery = "UPDATE construction SET
                 
                 construction_status = '$construction_status',
+                progress_status = '$progress_status',
 		latest_handover = '$latest_handover', 
                 latest_construct_complete = '$latest_construct_complete',
                 expect_handover = '$expect_handover',

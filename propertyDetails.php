@@ -31,9 +31,17 @@ $("#defaultTable").on("click", "td button", function () {
             cache: false,
             dataType: "JSON",
             success: function (data) {
+                
+                var text = data.progress_status;
+                var progress_status_array = text.split('<br>');
+                for (i = 0; i < progress_status_array.length -1; i++) { 
+                        $('#'+progress_status_array[i]).attr('checked', true);
+                    }
+                
+             
+                 
                 $('#defaultForm2 [name=construction_id]').val(data.construction_id);
                 $('[name=construction_status]').val(data.construction_status);
-                $('[name=progress_status]').val(data.progress_status);
                 $('[name=latest_handover]').val(data.latest_handover);
                 $('[name=latest_construct_complete]').val(data.latest_construct_complete);
                 $('[name=expect_handover]').val(data.expect_handover);
@@ -49,10 +57,14 @@ $("#defaultTable").on("click", "td button", function () {
 
     
       $('#defaultForm2').validator().on('submit', function (e) {
+          
+          
+          
+          
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
             $.ajax({
-                url: "http://localhost/sale_property1/doEditConstruction.php",
+                url: "./doEditConstruction.php",
                 type: "POST",
                 data: $('#defaultForm2').serialize(),
                 dataType: "JSON",
@@ -62,7 +74,7 @@ $("#defaultTable").on("click", "td button", function () {
                 },
                 error: function ()
                 {
-                    alert('Error adding data');
+                    alert('Something Wrong!');
                 }
             });
          }
@@ -147,8 +159,13 @@ function paymentOnchange(){
                     $street = $rowSelect['street']; 
                     $unit = $rowSelect['unit'];
                     $status = $rowSelect['property_status'];
-                    $target_price = $rowSelect['target_sale_price'];
+                    $standard_price = $rowSelect['standard_price'];
+                    $all_in_price = $rowSelect['all_in_price'];
+                    $promo_price = $rowSelect['promo_price'];
                     $actual_price = $rowSelect['actual_sale_price'];
+                    $price_scheme = $rowSelect['price_scheme'];
+                    $payment_type = $rowSelect['payment_type'];
+                    $other_payment = $rowSelect['other_payment'];
                     $description = $rowSelect['description'];
             ?>
             
@@ -242,14 +259,28 @@ $howmany=mysqli_affected_rows($link);
     <div id="menu2" class="tab-pane fade">
         <h3>Sale Price</h3>
        
-        <blockquote class="blockquote blockquote-reverse">
-            
-            <h3 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Target Sale price: $ <?php echo $target_price ?></h3>
-            <?php if ($_SESSION['role']=="admin") { ?>
-            <footer class="blockquote-footer"><span class="glyphicon glyphicon-cloud"></span> Sale price: $ <?php echo $actual_price ?></footer>
+
+
+        <br>
+          <span class="glyphicon glyphicon-cloud"></span> <b>Standard Price (Unit Only): </b> Rupiah <?php echo $standard_price ?><br><br>
+          <span class="glyphicon glyphicon-cloud"></span> <b>All-In Price (Include All Charges): </b> Rupiah <?php echo $all_in_price ?><br><br>
+          <span class="glyphicon glyphicon-cloud"></span> <b>Promo Price (Include All Charges): </b> Rupiah <?php echo $promo_price ?><br><br>
+
+         <?php if ($_SESSION['role'] != "agent") { ?>
+            <blockquote class="blockquote blockquote-reverse">
+            <h3 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Offer Price: Rupiah <?php echo $actual_price ?> </h3>
+            <h4 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Price Scheme: <?php echo $price_scheme ?> </h4>
+           
+            <?php if ($payment_type == 'Others') { ?>
+                <h4 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Payment Type: <?php echo $other_payment ?> </h4>
+            <?php } else { ?>
+                <h4 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Payment Type: <?php echo $payment_type ?> </h4>
             <?php } ?>
-        
-        </blockquote>
+            </blockquote>
+          <?php } ?>
+
+
+
         
         <?php if ($_SESSION['role']=="agent") { ?>
 
@@ -263,8 +294,22 @@ $howmany=mysqli_affected_rows($link);
     
                 
     <br>
+                    <div class="form-group">
+                <label class="control-label col-sm-3">Price Scheme:</label>
+                <div class="col-sm-9" name="price_scheme">
+                        
+                    <select class="form-control" id="price_scheme" name="price_scheme" required>
+                        <option value="">--Please Select--</option>
+                        <option value="Standard">Standard Price (Unit Only)</option>
+                        <option value="All-In">All-In Price (Include All Charges)</option>
+                        <option value="Promotion">Promo Price (Include All Charges)</option>
+                    </select>
+                        <div class="help-block with-errors"></div>
+                </div>
+            </div>
     
-<div class="form-group">
+
+    <div class="form-group">
                 <label class="control-label col-sm-3" for="actual_sale_price">Offer Price:</label>
                 <div class="col-sm-9">
                 <input type="text" class="form-control" id="actual_sale_price" name="actual_sale_price" 
@@ -279,8 +324,8 @@ $howmany=mysqli_affected_rows($link);
                         
                     <select class="form-control" id="payment_type" name="payment_type" onChange="paymentOnchange();" required>
                         <option value="">--Please Select--</option>
-                        <option value="loan">Loan</option>
-                        <option value="cash">Cash</option>
+                        <option value="Loan">Loan</option>
+                        <option value="Cash">Cash</option>
                         <option>Other</option>
                     </select>
                         <div class="help-block with-errors"></div>
@@ -553,6 +598,7 @@ $howmany=mysqli_affected_rows($link);
             <form id="defaultForm2" class="form-horizontal" role="form" action="#" method="post" data-toggle="validator">
                 
                 <input type="hidden" name="construction_id" value=""> 
+                <p id="progress_status_list"></p>
                 
                <div class="form-group">
                     <label class="control-label col-sm-3">Construction Status:</label>
@@ -573,13 +619,13 @@ $howmany=mysqli_affected_rows($link);
                                 <div class ="form-group">
                     <label class="control-label col-sm-3">Progress of Construction:</label>
                     <div class="col-sm-8" >
-                        <input type="checkbox" name="progress_status[]" value ="Foundation"/> Foundation <br>
-                        <input type="checkbox" name="progress_status[]" value ="Roof"/> Roof <br>
-                        <input type="checkbox" name="progress_status[]" value ="Handover"/> Handover <br>
-                        <input type="checkbox" name="progress_status[]" value ="Electricity"/> Electricity <br>
-                        <input type="checkbox" name="progress_status[]" value ="Drainage"/> Drainage <br>
-                        <input type="checkbox" name="progress_status[]" value ="IMB"/> IMB <br>
-                        <input type="checkbox" name="progress_status[]" value ="Certificate"/> Certificate 
+                        <input id= "Foundation" type="checkbox" name="progress_status[]" value ="Foundation" /> Foundation <br>
+                        <input id= "Roof" type="checkbox" name="progress_status[]" value ="Roof"/> Roof <br>
+                        <input id= "Handover" type="checkbox" name="progress_status[]" value ="Handover"/> Handover <br>
+                        <input id= "Electricity" type="checkbox" name="progress_status[]" value ="Electricity"/> Electricity <br>
+                        <input id= "Drainage"type="checkbox" name="progress_status[]" value ="Drainage"/> Drainage <br>
+                        <input id= "IMB" type="checkbox" name="progress_status[]" value ="IMB"/> IMB <br>
+                        <input id= "Certificate" type="checkbox" name="progress_status[]" value ="Certificate"/> Certificate 
                     <div class="help-block with-errors"></div>
                     </div>
                 </div>

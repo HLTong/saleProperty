@@ -29,7 +29,9 @@
         $block = $_POST['block'];
         $unit = $_POST['unit'];
         $street = $_POST['street'];
-        $target_sale_price = $_POST['target_sale_price'];
+        $standard_price = $_POST['standard_price'];
+        $all_in_price = $_POST['all_in_price'];
+        $promo_price = $_POST['promo_price'];
         $description = $_POST['description'];
         
         $targetPath = "img/";
@@ -42,8 +44,8 @@
         
         if (move_uploaded_file($_FILES['image']['tmp_name'], $completePath)) {
             $queryInsert = "INSERT INTO property
-                (project_id, block, unit, street, property_status, target_sale_price, description, property_image)
-                VALUES ('$project_id', '$block','$unit','$street','Available','$target_sale_price','$description','$fileName')";
+                (project_id, block, unit, street, property_status, standard_price, all_in_price, promo_price, description, property_image)
+                VALUES ('$project_id', '$block','$unit','$street','Available','$standard_price', '$all_in_price', '$promo_price', '$description','$fileName')";
             
             $resultInsert = mysqli_query($link, $queryInsert) or die;
             

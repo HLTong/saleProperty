@@ -7,6 +7,7 @@ $propertyID = $_POST['property_id'];
 $paymentType = $_POST['payment_type'];
 $otherPayment = $_POST['new_textbox'];
 $promotion = $_POST['promotion'];
+$price_scheme = $_POST['price_scheme'];
 $agentID = $_SESSION['agent_id'];
 $status = "Reserved";
 header("location:index.php");
@@ -15,7 +16,8 @@ $queryInsert = "UPDATE property SET
                 actual_sale_price='$actual_sale_price',
                 payment_type = '$paymentType',
                 other_payment = '$otherPayment',
-                promotion = '$promotion'
+                promotion = '$promotion',
+                price_scheme = '$price_scheme'
                 WHERE property_id= $propertyID";
 
 $resultInsert = mysqli_query($link, $queryInsert) or die;

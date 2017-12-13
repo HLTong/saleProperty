@@ -33,7 +33,9 @@ $("#defaultTable").on("click", "td button", function () {
                 $('[name=unit]').val(data.unit);
                 $('[name=street]').val(data.street);
                 $('[name=description]').val(data.description);
-                $('[name=target_sale_price]').val(data.target_sale_price);
+                $('[name=standard_price]').val(data.standard_price);
+                $('[name=all_in_price]').val(data.all_in_price);
+                $('[name=promo_price]').val(data.promo_price);
                 $('#myModal2').modal('show');  
                 $('#defaultForm')[0].reset();
             },
@@ -151,7 +153,6 @@ $("#defaultTable").on("click", "td button", function () {
         <th>Unit / Lots</th>
         <th>Block</th>
         <th>Street Name</th>
-        <th>Sale Price</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -173,7 +174,6 @@ $("#defaultTable").on("click", "td button", function () {
         
         <td> <?php echo $arrResult[$i]['block']; ?>  </td>
         <td> <?php echo $arrResult[$i]['street']; ?> </td>
-        <td> $<?php echo $arrResult[$i]['target_sale_price']; ?> </td>
         
         <?php if($arrResult[$i]['property_status'] == "Available"){?>
             <td style="color:green;"> <?php echo $arrResult[$i]['property_status']; ?> </td> 
@@ -238,16 +238,36 @@ $("#defaultTable").on("click", "td button", function () {
 
             
             <div class="form-group">
-                <label class="control-label col-sm-3" for="target_sale_price">Target Price:</label>
+                <label class="control-label col-sm-3" for="standard_price">Standard Price (Unit Only):</label>
                 <div class="col-sm-8">
-                <input type="text" class="form-control" id="target_sale_price" name="target_sale_price" 
-                       required data-error="Target Sale Price is required"/>
+                <input type="text" class="form-control" id="standard_price" name="standard_price" 
+                       required data-error="Standard Price (Unit Only) is required"/>
                 <div class="help-block with-errors"></div>
                 </div>
             </div>
             
             <div class="form-group">
+                <label class="control-label col-sm-3" for="all_in_price">All-In Price (Include All Charges):</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" id="all_in_price" name="all_in_price" 
+                       required data-error="All-In Price (Include All Charges) is required"/>
+                <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="promo_price">Promo Price (Include All Charges):</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" id="promo_price" name="promo_price" 
+                       required data-error="Promo Price (Include All Charges) is required"/>
+                <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
                 <label class="control-label col-sm-3" for="description">Description:</label>
+       
                 <div class="col-sm-8"><textarea rows="6" cols="10" class="form-control" id="description" name="description"/></textarea>
                 <div class="help-block with-errors"></div>
                 </div>
@@ -336,13 +356,32 @@ $("#defaultTable").on("click", "td button", function () {
 
             
             <div class="form-group">
-                <label class="control-label col-sm-3" for="target_sale_price">Target Price:</label>
+                <label class="control-label col-sm-3" for="standard_price">Standard Price (Unit Only):</label>
                 <div class="col-sm-8">
-                <input type="text" class="form-control" id="target_sale_price" name="target_sale_price" 
-                       required data-error="Target Sale Price is required"/>
+                <input type="text" class="form-control" id="standard_price" name="standard_price" 
+                       required data-error="Standard Price (Unit Only) is required"/>
                 <div class="help-block with-errors"></div>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="all_in_price">All-In Price (Include All Charges):</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" id="all_in_price" name="all_in_price" 
+                       required data-error="All-In Price (Include All Charges):"/>
+                <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="promo_price">Promo Price (Include All Charges):</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" id="promo_price" name="promo_price" 
+                       required data-error="Promo Price (Include All Charges):"/>
+                <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            
             
             <div class="form-group">
                 <label class="control-label col-sm-3" for="description">Description:</label>

@@ -2,7 +2,9 @@
 
 include("dbFunctions.php");
 
-$target_sale_price = $_POST['target_sale_price'];
+$standard_price = $_POST['standard_price'];
+$all_in_price = $_POST['all_in_price'];
+$promo_price = $_POST['promo_price'];
 $block = $_POST['block'];
 $unit = $_POST['unit'];
 $street = $_POST['street'];
@@ -10,7 +12,9 @@ $description = $_POST['description'];
 $id = $_POST['property_id']; //from the hidden form field 'id'
 
 $updateQuery = "UPDATE property SET
-		target_sale_price='$target_sale_price', 
+		standard_price='$standard_price',
+                all_in_price = '$all_in_price',
+                promo_price = '$promo_price',    
                 block='$block',
                 unit='$unit',
                 street='$street',

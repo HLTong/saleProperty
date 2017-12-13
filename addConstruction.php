@@ -13,7 +13,7 @@ $progress_status = $_POST['progress_status'];
 $text = "";
 
 for($i=0; $i<count($progress_status);$i++){
-    $text = $text . $progress_status[$i]." ";  
+    $text = $text . $progress_status[$i]."<br>";  
     
     
 }
@@ -52,8 +52,6 @@ for($i=0; $i<count($progress_status);$i++){
         <div class="container">
           <h3>This construction Details has been added!<br/></h3><br>
              Go back to <a href='index.php'>Home</a> 
-             
-             <?php echo $text;?>
         </div>
     </body>
 </html>

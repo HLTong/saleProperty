@@ -81,8 +81,13 @@ session_start();
                     $street = $rowSelect['street']; 
                     $unit = $rowSelect['unit'];
                     $status = $rowSelect['property_status'];
-                    $target_price = $rowSelect['target_sale_price'];
+                    $standard_price = $rowSelect['standard_price'];
+                    $all_in_price = $rowSelect['all_in_price'];
+                    $promo_price = $rowSelect['promo_price'];
                     $actual_price = $rowSelect['actual_sale_price'];
+                    $price_scheme = $rowSelect['price_scheme'];
+                    $payment_type = $rowSelect['payment_type'];
+                    $other_payment = $rowSelect['other_payment'];
                     $description = $rowSelect['description'];
             ?>
             
@@ -173,12 +178,24 @@ $howmany=mysqli_affected_rows($link);
       
     <div id="menu2" class="tab-pane fade">
         <h3>Sale Price</h3>
-       
+      
+        <br>
+          <span class="glyphicon glyphicon-cloud"></span> <b>Standard Price (Unit Only): </b> Rupiah <?php echo $standard_price ?><br><br>
+          <span class="glyphicon glyphicon-cloud"></span> <b>All-In Price (Include All Charges): </b> Rupiah <?php echo $all_in_price ?><br><br>
+          <span class="glyphicon glyphicon-cloud"></span> <b>Promo Price (Include All Charges): </b> Rupiah <?php echo $promo_price ?><br><br>
+
         <blockquote class="blockquote blockquote-reverse">
+            <h3 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Offer Price: Rupiah <?php echo $actual_price ?> </h3>
+            <h4 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Price Scheme: <?php echo $price_scheme ?> </h4>
+           
+            <?php if ($payment_type == 'Others') { ?>
+                <h4 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Payment Type: <?php echo $other_payment ?> </h4>
+            <?php } else { ?>
+                <h4 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Payment Type: <?php echo $payment_type ?> </h4>
+            <?php } ?>
             
-            <h3 class="mb-0"><span class="glyphicon glyphicon-cloud"></span> Target Sale price: $ <?php echo $target_price ?></h3>
-            <footer class="blockquote-footer"><span class="glyphicon glyphicon-cloud"></span> Sale price: $ <?php echo $actual_price ?></footer>
         </blockquote>
+          
     </div>
       
       
